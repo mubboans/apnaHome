@@ -1,0 +1,48 @@
+
+[
+  {
+    "id": "1",
+    "cname": "Khan",
+    "cemail": "khan@yahoo.co.in",
+    "country":"Ind",
+    "zipcode": "400011",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "added_on": "10/11/2022",
+    "contact":"9874563210"
+  },
+  {
+    "id": "2",
+    "cname": "Ansari",
+    "cemail": "ansar@yahoo.co.in",
+    "country":"Ind",
+    "zipcode": "400012",
+    "state": "Maharashtra",
+    "city": "Pune",
+    "added_on": "11/11/2022",
+    "contact":"9874563210"
+  },
+  {
+    "id": "3",
+    "cname": "shaikh",
+    "cemail": "shaikh@yahoo.co.in",
+    "country":"Ind",
+    "zipcode": "400013",
+    "state": "Maharashtra",
+    "city": "Nashik",
+    "added_on": "12/11/2022",
+    "contact":"9874563210"
+  },
+  {
+    "id": "4",
+    "cname": "quresh",
+    "cemail": "qurs@yahoo.co.in",
+    "country":"Ind",
+    "zipcode": "400014",
+    "state": "Maharashtra",
+    "city": "Thane",
+    "added_on": "14/11/2022",
+    "contact":"9874563210"
+  }
+]
+

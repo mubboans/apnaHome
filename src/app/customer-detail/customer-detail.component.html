@@ -1,0 +1,57 @@
+<div class="p-card">
+
+</div>
+<div class="p-grid p-d-flex p-jc-center ">
+
+    <div class="col-12 p-md-11">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="left">
+                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                <button pButton pRipple label="See Local Storage Data" class="p-button-danger" (click)="localData()"></button>
+            </ng-template>
+    
+            <ng-template pTemplate="right">
+                <p-fileUpload mode="basic" accept="image/*" disabled="true" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+                <button pButton pRipple label="Export" disabled="true" icon="pi pi-upload" class="p-button-help"></button>
+            </ng-template>
+        </p-toolbar>
+ <p-table #dt [value]="cust" [rows]="10" [paginator]="true" 
+     [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+     
+        <ng-template pTemplate="header">
+            <tr>
+                
+                <th pSortableColumn="name">Name</th>
+                <th pSortableColumn="price">Email</th>
+                <th pSortableColumn="category">Country</th>
+                <th pSortableColumn="rating">Zipcode </th>
+                <th pSortableColumn>State</th>
+                <th>Added On</th>   
+        <th>City</th>
+        <th>Date Added</th>
+        <th pSortableColumn="inventoryStatus">Action</th>
+        </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td>{{data.cname}}</td>
+                <td>{{data.cemail}}</td>
+                <td>{{data.country}}</td>
+                <td>{{data.zipcode}}</td>
+                <td>{{data.state}} </td>                
+                <td>{{data.city}}</td>
+                <td> {{data.added_on}} </td>
+                <td> {{data.contact}} </td>
+                
+                
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editExpo(data)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="del(data)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table> 
+    </div>
+</div>
