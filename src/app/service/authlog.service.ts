@@ -29,6 +29,14 @@ export class AuthlogService {
    )
 
 }
+
+// postOrderStatus(expi:Expo):Observable<any>{
+//   return this.http.post('./assets/expense.json',expi).pipe(
+//     map(x=>{
+//       return x;
+//     })
+//   )
+// }
 getUsers():Observable<any>{
   return this.http.get<any>('./assets/customer.json')
  .pipe(

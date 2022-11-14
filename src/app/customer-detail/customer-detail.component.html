@@ -7,7 +7,7 @@
         <p-toolbar styleClass="p-mb-4">
             <ng-template pTemplate="left">
                 <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-                <button pButton pRipple label="See Local Storage Data" class="p-button-danger" (click)="localData()"></button>
+                <!-- <button pButton pRipple label="See Local Storage Data" class="p-button-danger" (click)="localData()"></button> -->
             </ng-template>
     
             <ng-template pTemplate="right">
@@ -27,9 +27,9 @@
                 <th pSortableColumn="category">Country</th>
                 <th pSortableColumn="rating">Zipcode </th>
                 <th pSortableColumn>State</th>
+                <th>City</th>
                 <th>Added On</th>   
-        <th>City</th>
-        <th>Date Added</th>
+        <th>Contact</th>
         <th pSortableColumn="inventoryStatus">Action</th>
         </tr>
         </ng-template>
@@ -46,7 +46,7 @@
                 
                 
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editExpo(data)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editCust(data)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="del(data)"></button>
                 </td>
             </tr>
@@ -55,3 +55,73 @@
     </p-table> 
     </div>
 </div>
+<p-toast position="bottom-right"></p-toast>
+<p-dialog [(visible)]="custmodal" [style]="{width: '900px'}" header="Customer Details" [modal]="true"
+  styleClass="p-fluid">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field col-6">
+      <label for="name">Customer Name</label>
+      <input type="text" placeholder="Customer Name" pInputText id="name" [(ngModel)]="customer.cname" required
+        autofocus />
+      <small class="p-invalid" *ngIf="submitted && !customer.cname">Name is required.</small>
+    </div>
+    <div class="p-field col-6">
+        <label for="description">Contact</label>
+        <input type="text" placeholder="Contact" pInputText [(ngModel)]="customer.contact" />
+      </div>
+    <div class="p-field col-6">
+        <label for="description">Customer Email</label>
+        <input type="text" placeholder="Customer Email" pInputText [(ngModel)]="customer.cemail" />
+      </div>
+
+      <div class="p-field col-6">
+        <label for="description">Company Name</label>
+        <input type="text" placeholder="Company" pInputText [(ngModel)]="customer.company" />
+      </div>
+
+    <div class="p-field col-6">
+      <label for="description">Country</label>
+      <input type="text" placeholder="Country" pInputText [(ngModel)]="customer.country" />
+    </div>
+    <div class="p-field col-6">
+        <label>State</label>
+        <input type="text" pInputText placeholder="State" [(ngModel)]="customer.state" />
+      </div>
+      <div class="p-field col-6">
+        <label class="p-mb-3 ">City</label>
+        <input type="text" pInputText placeholder="City" [(ngModel)]="customer.city" />
+      </div>
+    <div class="p-field col-6">
+      <label class="p-mb-3">Zipcode</label>
+      <input type="text" placeholder="Zipcode" pInputText [(ngModel)]="customer.zipcode" />
+    </div>
+   
+    <div class="p-field col-6">
+        <label class="p-mb-3">Billing Address</label>
+        <input type="text" placeholder="Bill Country" pInputText [(ngModel)]="customer.bcountry" />
+        <input type="text" class="p-mt-3" placeholder="Bill State" pInputText [(ngModel)]="customer.bstate" />
+        <input type="text" class="p-mt-3" placeholder="Bill City" pInputText [(ngModel)]="customer.bcity" />
+        <input type="text" class="p-mt-3" placeholder="Bill zipcode" pInputText [(ngModel)]="customer.bzip" />
+        <textarea type="text" class="p-mt-3" pInputText placeholder="Address" [(ngModel)]="customer.baddress" ></textarea>
+       
+    </div>
+
+    
+    <div class="p-field col-6">
+      <label class="p-mb-3">Shipping Address</label>
+      <input type="text" placeholder="Bill Country" pInputText [(ngModel)]="customer.scountry" />
+      <input type="text" class="p-mt-3" placeholder="Bill State" pInputText [(ngModel)]="customer.sstate" />
+      <input type="text" class="p-mt-3" placeholder="Bill City" pInputText [(ngModel)]="customer.sbcity" />
+      <input type="text" class="p-mt-3" placeholder="Bill zipcode" pInputText [(ngModel)]="customer.szip" />
+      <textarea pInputText class="p-mt-3" placeholder="Address" [(ngModel)]="customer.saddress"></textarea>
+    </div>
+    <div class="p-field col-12">
+        <textarea pInputText class="p-mt-3" placeholder="Notes" [(ngModel)]="customer.note"></textarea> 
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="SaveCust()"></button>
+  </ng-template>
+</p-dialog>

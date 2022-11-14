@@ -1,37 +1,58 @@
 
 [
   {
+    "merchantorder":"1131",
     "id": "1",
-    "expensename": "Delhi Trip",
-    "expensedetail": "Include travel and t data",
+    "brand": "Puma",
+    "cname":"Khan",
+    "expedelidate":"30/11/2022",
+    "product":5,
+    "orderquantity":"100",
+    "confirmquantity":"80",
+
     "category": "active",
     "date": "01-12-2022",
     "isRecoverable": false,
     "added_by": "user",
-    "added_on": "06/11/2022",
-    "contact":"8798754897"
+    "orderdate": "06/11/2022",
+    "contact":"8798754897",
+    "status":1
   },
   {
+    "merchantorder":"1132",
     "id": "2",
-    "expensename": "Mumbai Trip",
-    "expensedetail": "Include travel ticket data",
+    "brand": "Adidas",
+    "cname":"Ansari",
+    "expedelidate":"01/11/2022",
+    "product":4,
+    "orderquantity":"120",
+    "confirmquantity":"90",
+
     "category": "active",
     "date": "30-10-2022",
     "isRecoverable": false,
     "added_by": "abdullah",
-    "added_on": "10/11/2022",
-    "contact":"8797549877"
+    "orderdate": "10/11/2022",
+    "contact":"8797549877",
+    "status":1
   },
   {
+    "merchantorder":"1133",
     "id": "3",
-    "expensename": "Kerala Trip",
-    "expensedetail": "Include food bill data",
+    "brand": "Nike",
+    "cname":"shaikh",
+    "expedelidate":"02/11/2022",
+    "product":8,
+    "orderquantity":"150",
+    "confirmquantity":"110",
+
     "category": "active",
     "date": "11-10-2022",
     "isRecoverable": true,
     "added_by": "rais",
-    "added_on": "09/09/2022",
-    "contact":"7985649879"
+    "orderdate": "09/09/2022",
+    "contact":"7985649879",
+    "status":1
   }
 ]
 

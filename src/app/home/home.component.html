@@ -1,155 +1,238 @@
-
 <div class="p-card">
 
 </div>
 <div class="p-grid p-d-flex p-jc-center ">
 
-    <div class="col-12 p-md-11">
-        <p-toolbar styleClass="p-mb-4">
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-                <button pButton pRipple label="See Local Storage Data" class="p-button-danger" (click)="localData()"></button>
-            </ng-template>
-    
-            <ng-template pTemplate="right">
-                <p-fileUpload mode="basic" accept="image/*" disabled="true" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
-                <button pButton pRipple label="Export" disabled="true" icon="pi pi-upload" class="p-button-help"></button>
-            </ng-template>
-        </p-toolbar>
- <p-table #dt [value]="expes" [rows]="10" [paginator]="true" 
-     [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-     
-        <ng-template pTemplate="header">
-            <tr>
+  <div class="col-12 p-md-12">
+    <p-toolbar styleClass="p-mb-4">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="openNew()"></button>
+        <!-- <button pButton pRipple label="See Local Storage Data" class="p-button-danger" (click)="localData()"></button> -->
+      </ng-template>
 
-                <th pSortableColumn="name">Name</th>
-                <th pSortableColumn="price">Detail</th>
-                <th pSortableColumn="category">Travel Date </th>
-                <th pSortableColumn="rating">Added By </th>
-                <th pSortableColumn>Contact</th>
+      <ng-template pTemplate="right">
+        <p-fileUpload mode="basic" accept="image/*" disabled="true" [maxFileSize]="1000000" label="Import"
+          chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+        <button pButton pRipple label="Export" disabled="true" icon="pi pi-upload" class="p-button-help"></button>
+      </ng-template>
+    </p-toolbar>
+    <p-table #dt [value]="expes" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
 
-                <th>
-                    Added On
-                </th>
-                <th pSortableColumn="inventoryStatus">Action</th>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Merchant OrID</th>
+          <th pSortableColumn="price">Brand</th>
+          <th>Customer Name</th>
+          <th pSortableColumn="category">Order Date </th>
+          <th pSortableColumn="rating">ExpecDelivery</th>
+          <th pSortableColumn>Product</th>
         
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-data>
-            <tr>
-                <td>{{data.expensename}}</td>
-                <td>{{data.expensedetail}}</td>
-                <td>{{data.date}}</td>
-                <td>{{data.added_by}}</td>
-                <td>{{data.contact}} </td>                
-                <td>
-                    {{data.added_on}}
-                </td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editExpo(data)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="del(data)"></button>
-                </td>
-            </tr>
-        </ng-template>
+          <th>Order quantity</th>
+          <th pSortableColumn="inventoryStatus">Confirm quantity</th>
+          <th>Status</th>
+          <th>Status Action</th>
+          <th>Action</th>
+     
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data>
+        <tr>
+          <td>{{data.merchantorder}}</td>
+          <td>{{data.brand}}</td>
+          <td>{{data.cname}} </td>
+          <td>{{data.orderdate}}</td>
+          <td>{{data.expedelidate}}</td>
+          <td> {{data.product}} </td>
+          <td> {{data.orderquantity}} </td>
+          <td> {{data.confirmquantity}} </td>
+          <td>
+            <p-tag
+              [value]="(data.status === 1)? 'Ordered': (data.status === 2)? 'Processing': (data.status === 3)? 'Shipped': (data.status === 4)? 'Delivered': (data.status === 10)? 'Cancelled' : '' "
+              *ngIf="data.status" class="p-text-uppercase"
+              [severity]="(data.status < 4)? 'warning': (data.status === 10)? 'danger': 'success'"></p-tag>
 
-    </p-table> 
-    </div>
+          </td>
+
+          <td>
+            <!-- [ngClass]="{'p-button-warning': data.status === 1, 'p-button-success': data.status > 1} [disabled]="data.status !== 1"" -->
+            <button pButton pRipple icon="pi pi-cog" [disabled]="data.status !== 1" pButton pRipple icon="pi pi-cog"
+            [ngClass]="{'p-button-warning': data.status === 1, 'p-button-success': data.status > 1}" class="p-button-rounded p-button-sm p-mr-1"
+              (click)="fnProcessing(data)" pTooltip="Process Order" tooltipPosition="left"></button>
+              
+              
+
+              <button   pButton pRipple icon="pi pi-envelope" [disabled]="data.status !== 2"
+              [ngClass]="{'p-button-secondary': data.status < 2 || data.status === 10, 'p-button-warning': data.status === 2, 'p-button-success': data.status > 2}"
+                  class="p-button-rounded p-button-sm p-mr-1" (click)="fnShipping(data)"
+                  pTooltip="Shipping data" tooltipPosition="left"></button>
+                
+                  <button  [disabled]="data.status !== 3" pButton pRipple icon="pi pi-check"
+                  [ngClass]="{'p-button-warning': data.status === 3, 'p-button-success': data.status > 3, 'p-button-secondary': data.status < 3  || data.status === 10 }"
+                      class="p-button-rounded p-button-sm p-mr-1" (click)="fnCompleted(data)"
+                      pTooltip="Complete Order" tooltipPosition="left"></button>
+
+          </td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+              (click)="editExpo(data)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+              (click)="del(data)"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
 </div>
-       
 
-<p-dialog [(visible)]="storageModal" [style]="{width: '900px'}" header="Local storage data" [modal]="true" styleClass="p-fluid">
-    <div class="card">
-        <p-dataView #dv [value]="dataviewData" [paginator]="true" [rows]="9" filterBy="name"
-           layout="grid">
-            <ng-template pTemplate="header">
-                <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
-                    <span class="p-input-icon-left p-mb-2 p-mb-md-0">
-                        <i class="pi pi-search"></i>
-                        <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
-                    </span>
-                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-                </div>
-            </ng-template>
-            <ng-template let-product pTemplate="listItem">
-                <div class="p-col-12">
-                    <div class="product-list-item">
-                        <div class="product-list-detail">
-                            <div class="product-name">{{product.expensename}}</div>
-                            <div class="product-description">{{product.detail}}</div>
-                           
-                            <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
-                        </div>
-                        <div class="product-list-action">
-                            <span class="product-price">${{product.contact}}</span>
-                            <span class="product-price">${{product.date}}</span>
-                            <span class="product-price">${{product.added_on}}</span>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-            <ng-template let-product pTemplate="gridItem">
-                <div class="p-col-12 p-md-4">
-                    <div class="product-grid-item card">
-                        <div class="product-grid-item-top">
-                            <div>
-                                <i class="pi pi-tag product-category-icon"></i>
-                                <span class="product-category">{{product.category}}</span>
-                            </div>
-                          
-                        </div>
-                        <div class="product-grid-item-content">
-                           
-                            <div class="product-name">{{product.expensename}}</div>
-                            <div class="product-description">{{product.detail}}</div>
-                           
-                        </div>
-                        <div class="product-grid-item-bottom">
-                            <span class="product-price">${{product.contact}}</span>
-                            </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-dataView>
-    </div>
+
+<p-dialog [(visible)]="storageModal" [style]="{width: '900px'}" header="Local storage data" [modal]="true"
+  styleClass="p-fluid">
+  <div class="card">
+    <p-dataView #dv [value]="dataviewData" [paginator]="true" [rows]="9" filterBy="name" layout="grid">
+      <ng-template pTemplate="header">
+        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+          <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+            (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+          <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+            <i class="pi pi-search"></i>
+            <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+          </span>
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </ng-template>
+      <ng-template let-product pTemplate="listItem">
+        <div class="p-col-12">
+          <div class="product-list-item">
+            <div class="product-list-detail">
+              <div class="product-name">{{product.expensename}}</div>
+              <div class="product-description">{{product.detail}}</div>
+
+              <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
+            </div>
+            <div class="product-list-action">
+              <span class="product-price">${{product.contact}}</span>
+              <span class="product-price">${{product.date}}</span>
+              <span class="product-price">${{product.added_on}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-product pTemplate="gridItem">
+        <div class="p-col-12 p-md-4">
+          <div class="product-grid-item card">
+            <div class="product-grid-item-top">
+              <div>
+                <i class="pi pi-tag product-category-icon"></i>
+                <span class="product-category">{{product.category}}</span>
+              </div>
+
+            </div>
+            <div class="product-grid-item-content">
+
+              <div class="product-name">{{product.expensename}}</div>
+              <div class="product-description">{{product.detail}}</div>
+
+            </div>
+            <div class="product-grid-item-bottom">
+              <span class="product-price">${{product.contact}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
 </p-dialog>
 
 
 
 
 <p-toast position="bottom-right"></p-toast>
-<p-dialog [(visible)]="displayModal" [style]="{width: '650px'}" header="Expenses Details" [modal]="true" styleClass="p-fluid">
-    <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field col-6">
-            <label for="name">Name</label>
-            <input type="text" placeholder="Trip Name" pInputText id="name" [(ngModel)]="expenses.expensename" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !expenses.expensename">Name is required.</small>
-        </div>
-        <div class="p-field col-6">
-            <label for="description">Detail</label>
-            <input type="text" placeholder="Trip Detail" pInputText [(ngModel)]="expenses.expensedetail"/>
-        </div>
-
-        <div class="p-field col-6">
-            <label class="p-mb-3">Date</label>
-                <input type="text" placeholder="Trip Date" pInputText [(ngModel)]="expenses.date"/>
-        </div>
-        <div class="p-field col-6">
-            <label class="p-mb-3">Added By</label>
-                <input type="text" pInputText placeholder="Trip Added By" [(ngModel)]="expenses.added_by"/>
-        </div>
-        <div class="p-field col-6">
-            <label class="p-mb-3 ">Contact</label>
-                <input type="text" pInputText placeholder="Contact To" [(ngModel)]="expenses.contact"/>
-        </div> <div class="p-field col-6">
-            <label class="p-mb-3">Added On</label>
-                <input type="text" pInputText placeholder="Trip Added On" [(ngModel)]="expenses.added_on"/>
-        </div>
+<p-dialog [(visible)]="displayModal" [style]="{width: '850px'}" header="Product Details" [modal]="true"
+  styleClass="p-fluid">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field col-6">
+      <label for="name">Brand</label>
+      <input type="text" placeholder="Brand Name" pInputText id="name" [(ngModel)]="expenses.brand" required
+        autofocus />
+      <small class="p-invalid" *ngIf="submitted && !expenses.brand">Name is required.</small>
     </div>
+    <div class="p-field col-6">
+        <label for="description">Customer Name</label>
+        <input type="text" placeholder="Customer Name" pInputText [(ngModel)]="expenses.cname" />
+      </div> 
+      <div class="p-field col-6">
+        <label for="description">Customer Email</label>
+        <input type="text" placeholder="Customer Emai" pInputText [(ngModel)]="expenses.cemail" />
+      </div> <div class="p-field col-6">
+        <label for="description">Country</label>
+        <input type="text" placeholder="Country" pInputText [(ngModel)]="expenses.country" />
+      </div> 
+      <div class="p-field col-6">
+        <label for="description">State</label>
+        <input type="text" placeholder="State" pInputText [(ngModel)]="expenses.state" />
+      </div>
+       <div class="p-field col-6">
+        <label for="description">City</label>
+        <input type="text" placeholder="City" pInputText [(ngModel)]="expenses.city" />
+      </div> 
+      <div class="p-field col-6">
+        <label for="description">Zipcode</label>
+        <input type="text" placeholder="Zipcode" pInputText [(ngModel)]="expenses.zipcode" />
+      </div>
     
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-    </ng-template>
+
+    <!-- <div class="p-field col-6">
+      <label for="description">Order Date</label>
+      <input type="text" placeholder="Order Date" pInputText [(ngModel)]="expenses.orderdate" />
+    </div> -->
+
+
+    <div class="p-field col-6">
+      <label class="p-mb-3">Product</label>
+      <input type="text" pInputText placeholder="Product" [(ngModel)]="expenses.product" />
+    </div>
+    <div class="p-field col-6">
+      <label class="p-mb-3 ">Order Quantity</label>
+      <input type="text" pInputText placeholder="Order Quantity" [(ngModel)]="expenses.orderquantity" />
+    </div>
+    <div class="p-field col-6">
+      <label class="p-mb-3">Confirm Quantity</label>
+      <input type="text" pInputText placeholder="Confirm Quantity" [(ngModel)]="expenses.confirmquantity" />
+    </div>
+    <div class="p-field col-6">
+        <label for="description">Order Date</label>
+        <input type="text" placeholder="Order Date" pInputText [(ngModel)]="expenses.orderdate" />
+      </div>
+
+      <div class="p-field col-6">
+        <label>Expected Delivery Date</label>
+        <input type="text" pInputText placeholder="Expected Delivery Date" [(ngModel)]="expenses.expedelivery" />
+      </div>
+
+  <div class="p-field col-6">
+    <label class="p-mb-3 ">Billing Address</label>
+    <textarea type="text" pInputText placeholder="Billing Address" [(ngModel)]="expenses.address" ></textarea>
+  </div>
+
+  <div class="p-field col-6">
+    <label class="p-mb-3 ">Shipping Address</label>
+    <textarea type="text" pInputText placeholder="Shipping Address" [(ngModel)]="expenses.shipaddress" ></textarea>
+  </div>
+  
+
+  
+ 
+  <div class="p-field col-6">
+    <label class="p-mb-3">Shipping Method</label>
+    <input type="text" pInputText placeholder="Shipping Method" [(ngModel)]="expenses.method" />
+  </div>
+
+</div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+  </ng-template>
 </p-dialog>

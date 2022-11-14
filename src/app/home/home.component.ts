@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 displayModal:boolean;
 cars:any[]
 caty:any
-history:History;
+
 constructor(public auth:AuthlogService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 expes:Expo[];
 expenses:Expo;
@@ -22,6 +22,7 @@ cities: any[];
 foods: any[];
 storageModal:boolean;
 dataviewData:any[];
+expi:Expo;
   ngOnInit(): void {
     this.cities = [
       {name: 'New York', code: 'NY'},
@@ -44,22 +45,44 @@ dataviewData:any[];
     },{
       id:222,name:'musaddik'
     }]
+  
+    this.getProduct()
+  }
+  getProduct(){
     this.auth.getProducts().subscribe((x:any[]) => {
       console.log(x)
       this.expes = x
       this.dataa=x.map(x=>x.history)
-      // localStorage.setItem("trim",JSON.stringify(this.expes))
+  
       console.log(this.expes,"detail chekc",this.dataa)
     });
-    // this.dataviewData=JSON.parse(localStorage.getItem("trim"))
   }
 showModalDialog(){
 
 }
-
+fnProcessing(order: Expo){ 
+  this.processStatus(order.id, 2,order);
+}
+processStatus(id:string,status:number,ep:Expo){
+  this.expi=ep
+    this.expi.id = id;
+    this.expi.status = status;
+    console.log(this.expi,"data check")
+    this.expes=[...this.expes]
+    // this.auth.postOrderStatus(this.expi).subscribe(() => {
+    //   this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Order Processed', life: 3000 });
+    //   this.getProduct();
+    // })
+  
+}
+fnShipping(order: Expo){  
+  this.processStatus(order.id, 3,order);
+}
+fnCompleted(order: Expo){ 
+  this.processStatus(order.id, 4,order);
+}
 openNew() {
 
-  this.history = {}
   this.expenses = {};
   this.submitted = false;
   this.displayModal = true;
@@ -105,12 +128,16 @@ addhistory(){
 saveProduct() {
   this.submitted = true;
 
-  if (this.expenses.expensename.trim()) {
+  if (this.expenses.cname.trim()) {
       if (this.expenses.id) {
+        this.expenses.status=1
+
           this.expes[this.findIndexById(this.expenses.id)] = this.expenses;                
           this.messageService.add({severity:'success', summary: 'Successful', detail: 'Expense Updated', life: 3000});
       }
       else {
+        this.expenses.status=1
+        this.expenses.merchantorder=this.createMerId();
           this.expenses.id = this.createId();
           this.expenses.added_by = 'Users';
           this.expes.push(this.expenses);
@@ -138,6 +165,14 @@ findIndexById(id: string): number {
   return index;
 }
 
+createMerId(): string {
+  let id = '';
+  var chars = '01234567898787497514987419874549874577498779849447445489449848840123456789';
+  for ( var i = 0; i < 4; i++ ) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return id;
+}
 createId(): string {
   let id = '';
   var chars = '012345678987874975149874198745498745774987798494474';
@@ -149,6 +184,28 @@ createId(): string {
 
 }
 export class Expo{
+  merchantorder?:string;
+  public Country?:string;
+  cemail?:string;
+  company?:string;
+  country?:string;
+  state?:string;
+  city?:string;
+  zipcode?:string;
+  brand?:string;
+  cname?:string;
+  expedelidate?:string;
+  product?:number;
+  orderquantity?:number;
+  confirmquantity?:string;
+  public address?:string;
+  public shipaddress?:string;
+  public expedelivery?:string; 
+  public method?:string;
+  orderdate?:string;
+  
+
+
   public expensename?:string;
   public expensedetail?:string;
   public category?:Caty;
@@ -159,6 +216,7 @@ export class Expo{
   public history?:Array<any>;
   public id?:string;
   public contact?:string;
+  public status?:number;
 }
 export class History{
   public id?: number;     

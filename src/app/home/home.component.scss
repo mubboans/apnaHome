@@ -3,6 +3,31 @@
     border-radius: 10px;
 }
 :host ::ng-deep {
+    .p-datatable .p-datatable-thead > tr > th {
+        text-align: center;
+        padding: 1rem 1rem;
+        border: 1px solid #e9ecef;
+        border-width: 0 0 1px 0;
+        font-weight: 600;
+        color: #495057;
+        font-size: 11px;
+        background: #f8f9fa;
+        transition: box-shadow 0.2s;
+    }
+    .p-datatable .p-datatable-tbody > tr > td {
+        text-align: center;
+        border: 1px solid #e9ecef;
+        border-width: 0 0 1px 0;
+        padding: 1rem 0.8rem;
+    }
+    .p-button.p-button-icon-only {
+        width: 1.5rem;
+        padding: 0.5rem 0;
+    }
+    .p-button.p-button-icon-only.p-button-rounded {
+        border-radius: 50%;
+        height: 1.5rem;
+    }
     .p-dropdown {
         width: 14rem;
         font-weight: normal;
