@@ -1,5 +1,6 @@
 
- <app-header></app-header>
+ <app-header *ngIf="sto.isUserLogin()"></app-header>
+ 
  <main class="main">
   <!-- <app-login></app-login> -->
 <router-outlet>
@@ -8,5 +9,5 @@
 <!-- <app-home></app-home> -->
  </main>
 
- <!-- <app-footer></app-footer>  -->
+ <app-footer *ngIf="sto.isUserLogin()"></app-footer> 
 

@@ -1,9 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators'; 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { Expo } from '../home/home.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,15 @@ export class AuthlogService {
  url = "https://admin.eniola.app/api/v1/login";
   constructor(public http:HttpClient) { }
   fnLogUser(data:any):Observable<any>{
-    const dataa={
-      headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': 'http://localhost:61002/' },
-      body:data
-    }
-    return this.http.post<any>(this.url, dataa)
+    return this.http.post<any>(`${environment.serverUrl}login`, data).pipe(map(x=>{
+      return x;
+    }),catchError(this.handleError))
+  }
+  fnRegisterUser(data:any):Observable<any>{
+    return this.http.post<any>(`${environment.serverUrl}register`,data).pipe(map(x=>{
+      return x;
+    }),catchError(this.handleError))
+
   }
   getProducts():Observable<any>{
     return this.http.get<any>('./assets/expense.json')
@@ -30,13 +35,6 @@ export class AuthlogService {
 
 }
 
-// postOrderStatus(expi:Expo):Observable<any>{
-//   return this.http.post('./assets/expense.json',expi).pipe(
-//     map(x=>{
-//       return x;
-//     })
-//   )
-// }
 getUsers():Observable<any>{
   return this.http.get<any>('./assets/customer.json')
  .pipe(
@@ -46,5 +44,7 @@ getUsers():Observable<any>{
  )
 
 }
-
+handleError(error?:HttpErrorResponse) {
+  return throwError(error || "Server Errors")
+}
 }

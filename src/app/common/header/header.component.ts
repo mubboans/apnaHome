@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng-lts/api/menuitem';
 import {TabMenuModule} from 'primeng-lts/tabmenu';
 import {MenubarModule} from 'primeng-lts/menubar';
+import { StorageService } from 'src/app/service/storage.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,7 +10,7 @@ import {MenubarModule} from 'primeng-lts/menubar';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public sto:StorageService) { }
   items: MenuItem[];
   menuitem: MenuItem[];
 
@@ -47,5 +48,7 @@ export class HeaderComponent implements OnInit {
     {label: 'loungewear', icon: 'pi pi-fw pi-thumbs-up'},
 ];
   }
-
+  fnLogout(){
+    this.sto.logoutUser()
+  }
 }

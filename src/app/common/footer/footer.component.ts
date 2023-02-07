@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Expo } from '../home/home.component';
-import { AuthlogService } from '../service/authlog.service';
+import { Expo } from 'src/app/home/home.component';
+import { AuthlogService } from 'src/app/service/authlog.service';
+
 
 @Component({
   selector: 'app-footer',
