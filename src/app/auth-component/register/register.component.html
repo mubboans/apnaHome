@@ -1,18 +1,18 @@
-<div class="p-grid">
-    <div class="p-col-6">
-        <div class="p-card p-col-11 p-mx-auto p-px-4">
+<div class="p-grid p-mt-5">
+    <div class="p-card p-col-11 p-md-6 p-lg-4 p-mx-auto p-px-4">
+        <!-- <div class="p-card p-col-11 p-mx-auto p-px-4"> -->
     
             <form name="loginForm" [formGroup]="regForm">
                 <p class="p-text-muted">Creat Account</p>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" pInputText name="username" class="form-control" 
-                        placeholder="full name" formControlName="username" autocomplete="username" >
+                        placeholder="Username" formControlName="username" autocomplete="username" >
                 </div>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" pInputText name="username" class="form-control"
-                        placeholder="email address" formControlName="email" autocomplete="username" required>
+                        placeholder="Email" formControlName="email" autocomplete="username" required>
                 </div>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
@@ -27,7 +27,7 @@
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" pInputText formControlName="type" name="username" class="form-control"
-                        placeholder="interests" autocomplete="username" required>
+                        placeholder="Interest" autocomplete="username" required>
                 </div>
                 <!-- <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -42,12 +42,12 @@
     
                     <p-checkbox label="by registering you agree with our t&c and privacy policy"></p-checkbox> 
                 </div>
-              
+                <button pButton type="button" routerLink="/login" label="Already account login" class="p-button-outlined p-mb-3"></button>
                     <button type="button" [disabled]="regForm.invalid" (click)="regUser()" pButton class="p-button-warn">Creat Account</button>
                 
             </form>
        
     
-        </div>
+        <!-- </div> -->
     </div>
 </div>
