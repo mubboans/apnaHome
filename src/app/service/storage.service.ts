@@ -13,6 +13,7 @@ export class StorageService {
   getUserData(){
     return localStorage.getItem('userData');
   }
+  
   isUserLogin(){
     return !!localStorage.getItem('userData');
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+
 import { StorageService } from './service/storage.service';
 
 @Component({
@@ -7,11 +9,14 @@ import { StorageService } from './service/storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(public sto:StorageService){}
-  ngOnInit(): void {
-    console.log(this.sto.isUserLogin());
-    
+  constructor(public sto:StorageService,public router:Router){
   }
-  title = 'lazy-load-sample';
+  ngOnInit(): void {
+    this.router.events.subscribe((event: NavigationEnd) => {
+        if(event.url == '/login'){
+         this.sto.logoutUser()
+      }
+    })  
+  }    
 
 }

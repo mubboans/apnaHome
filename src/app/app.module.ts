@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {DataViewModule} from 'primeng-lts/dataview';
 import {MenubarModule} from 'primeng-lts/menubar';
@@ -23,6 +23,9 @@ import { LoginComponent } from './auth-component/login/login.component';
 import { RegisterComponent } from './auth-component/register/register.component';
 import { SpinnerComponent } from './common/spinner/spinner.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TimelinecardComponent } from './pages/timelinecard/timelinecard.component';
+import { MyPropertyComponent } from './pages/my-property/my-property.component';
+import { AppInitService, initializeApp1 } from './helper/app-init.service';
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     SidebarComponent,
     RegisterComponent,
      SpinnerComponent,
-    DashboardComponent
+    DashboardComponent,
+    TimelinecardComponent,
+    MyPropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     SharedModule
   ],
   providers: [
-   
+   AppInitService,
+   {provide:APP_INITIALIZER,useFactory:initializeApp1,deps:[AppInitService],multi:true},
     {provide: HTTP_INTERCEPTORS,useClass:JwtInterceptor, multi:true}
     
   ],

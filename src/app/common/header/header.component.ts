@@ -13,12 +13,16 @@ export class HeaderComponent implements OnInit {
   constructor(public sto:StorageService) { }
   items: MenuItem[];
   menuitem: MenuItem[];
-
+  uname:string;
   activeItem: MenuItem;
   selectedCity1:string;
   cities: any[];
+  userdata:any
   ngOnInit(): void {
-
+   this.userdata=JSON.parse(this.sto.getUserData())
+   console.log(this.userdata,'Check');
+   const d= this.userdata.userdetail;
+   this.uname=d.username
     this.cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -35,18 +39,22 @@ export class HeaderComponent implements OnInit {
     {
         label:'Customer List',
         url:'customerlist'  
+    },
+    {
+      label:'My Property',
+      url:'my-property'  
     }
   ];
-  this.menuitem = [
-    {label: 'lingerie', icon: 'pi pi-fw pi-home'},
-    {label: 'sleepwwear', icon: 'pi pi-fw pi-calendar'},
-    {label: 'robes', icon: 'pi pi-fw pi-pencil'},
-    {label: 'swimwear & coverups', icon: 'pi pi-fw pi-file'},
-    {label: 'stocking & hosiery', icon: 'pi pi-fw pi-cog'},
-    {label: 'satin', icon: 'pi pi-apple'},
-    {label: 'plus size', icon: 'pi pi-fw pi-book'},
-    {label: 'loungewear', icon: 'pi pi-fw pi-thumbs-up'},
-];
+//   this.menuitem = [
+//     {label: 'lingerie', icon: 'pi pi-fw pi-home'},
+//     {label: 'sleepwwear', icon: 'pi pi-fw pi-calendar'},
+//     {label: 'robes', icon: 'pi pi-fw pi-pencil'},
+//     {label: 'swimwear & coverups', icon: 'pi pi-fw pi-file'},
+//     {label: 'stocking & hosiery', icon: 'pi pi-fw pi-cog'},
+//     {label: 'satin', icon: 'pi pi-apple'},
+//     {label: 'plus size', icon: 'pi pi-fw pi-book'},
+//     {label: 'loungewear', icon: 'pi pi-fw pi-thumbs-up'},
+// ];
   }
   fnLogout(){
     this.sto.logoutUser()
