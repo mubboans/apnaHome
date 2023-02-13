@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       username:fb.control('',Validators.required),
       password:fb.control('',Validators.required)
     })
+    storage.logoutUser();
    }
 
   ngOnInit(): void {
@@ -33,15 +34,14 @@ export class LoginComponent implements OnInit {
       console.log(x);
       
       if(x.token){
-       
-      
-        this.messageService.add({severity:'success', summary:'Success', detail:'Successfull',life:2000});    
+        this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});    
         setTimeout(()=>{
           const helper = new JwtHelperService();
+          this.storage.setToken(x.token);
           const decoded= helper.decodeToken(x.token);
           this.storage.setUserData(decoded);
           this.route.navigate(['/dashboard']);
-        },2000)
+        },1000)
         
 
         

@@ -21,8 +21,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
    this.userdata=JSON.parse(this.sto.getUserData())
    console.log(this.userdata,'Check');
-   const d= this.userdata.userdetail;
-   this.uname=d.username
+   this.uname= this.userdata.username;
     this.cities = [
         {name: 'New York', code: 'NY'},
         {name: 'Rome', code: 'RM'},
@@ -43,6 +42,9 @@ export class HeaderComponent implements OnInit {
     {
       label:'My Property',
       url:'my-property'  
+    },
+    {
+      label:'Dashboard',url:'dashboard'
     }
   ];
 //   this.menuitem = [

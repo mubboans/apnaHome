@@ -10,6 +10,12 @@ export class StorageService {
   setUserData(data){
     localStorage.setItem('userData', JSON.stringify(data));
   }
+  setToken(data){
+    localStorage.setItem('token', JSON.stringify(data));
+  }
+  getToken(){
+   return localStorage.getItem('token');
+  }
   getUserData(){
     return localStorage.getItem('userData');
   }
