@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth-component/register/register.component'
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { RouteGuardGuard } from './helper/route-guard.guard';
 import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './pages/admin/admin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MyPropertyComponent } from './pages/my-property/my-property.component';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   {
     path:'my-property',component:MyPropertyComponent,canActivate:[RouteGuardGuard]
   },
+  {path:'admin',component:AdminComponent},
   {path:'',redirectTo:'login',pathMatch:'full'},
 ];
 

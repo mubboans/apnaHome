@@ -3,3 +3,43 @@ form{
     flex-direction: column;
     align-items: center;
 }
+.error{
+    color: red;
+    text-align: left;
+    margin-bottom: 3px;
+}
+.eye-icon{
+    background: none!important ;
+    border: none !important;
+    position: absolute;
+        left: 61.5%; 
+    right: 39%; 
+    margin-top: 3px;  z-index:10001 ;
+
+}
+@media screen and (max-width:768px) {
+    .eye-icon{
+        background: none!important ;
+        border: none !important;
+        position: absolute;
+        left: 66.5%;
+    right: 39%;
+    margin-top: 3px;
+    
+    }
+}
+@media screen and (max-width:426px) {
+    .eye-icon{
+        background: none!important ;
+        border: none !important;
+        position: absolute;
+        left: 80.5% !important;
+        right: 39%;
+        margin-top: 3px;
+    }
+}
+:host ::ng-deep {
+    .p-password input {
+        width: 15rem
+    }
+} 

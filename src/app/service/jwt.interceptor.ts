@@ -14,13 +14,12 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(public sto:StorageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const data = JSON.parse(this.sto.getToken())
+    const data = JSON.parse(this.sto.getUserData())
     if(data){
-      request=request.clone({
-     
-          setHeaders: { Authorization: `Bearer ${data}` }
-        
-       });
+      const token =data.accessToken
+      request=request.clone({     
+          setHeaders: { Authorization: `Bearer ${token}` }
+         });
     }
     else{
       request=request.clone({

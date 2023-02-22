@@ -11,18 +11,39 @@ import { AuthlogService } from 'src/app/service/authlog.service';
 })
 export class RegisterComponent implements OnInit {
   regForm:FormGroup;
+  showpass:boolean=false;
+  showconfirmpass:boolean=false;
+  passwordmatch:boolean;
+  typearr=[
+    {role:"Buyer",value:"buyer"},
+    {role:"Seller",value:"seller"}
+  ]
   constructor(public messageService:MessageService,public fb:FormBuilder,public authlog:AuthlogService,public route:Router) {
     this.regForm=fb.group({
       username:fb.control('',Validators.required),
       password:fb.control('',Validators.required),
       confirmpassword:fb.control('',Validators.required),
-      email:fb.control('',Validators.required),
+      email:fb.control('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       type:fb.control('',Validators.required),
       user_role:fb.control('2')
     })
    }
 
   ngOnInit(): void {
+    console.log(this.formControl)
+  }
+  onPasswordChange() {
+    if(this.regForm.get('password').value && this.regForm.get('confirmpassword').value){
+    if (this.regForm.get('password').value == this.regForm.get('confirmpassword').value) {
+    this.passwordmatch=false;
+    } else {
+     this.passwordmatch=true;
+    }
+  }
+  }
+  get formControl(){
+    this.onPasswordChange()
+    return this.regForm.controls;
   }
 regUser(){
   this.authlog.fnRegisterUser(this.regForm.value).subscribe((x:any)=>{

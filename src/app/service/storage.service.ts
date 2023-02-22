@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class StorageService {
 
   constructor(public route:Router) { }
+  
   setUserData(data){
     localStorage.setItem('userData', JSON.stringify(data));
   }

@@ -45,13 +45,14 @@ import { ToolbarModule } from 'primeng-lts/toolbar';
 import { TooltipModule } from 'primeng-lts/tooltip';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ConfirmationService, MessageService } from 'primeng-lts/api';
-
+import {PasswordModule} from 'primeng-lts/password';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    PasswordModule,
     TableModule,
     MultiSelectModule,
     DataViewModule,
@@ -108,6 +109,7 @@ import { ConfirmationService, MessageService } from 'primeng-lts/api';
   exports:[
     CommonModule,
     TableModule,
+    PasswordModule,
     MultiSelectModule,
     DataViewModule,
     BrowserAnimationsModule,

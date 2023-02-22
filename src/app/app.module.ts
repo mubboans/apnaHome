@@ -26,6 +26,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TimelinecardComponent } from './pages/timelinecard/timelinecard.component';
 import { MyPropertyComponent } from './pages/my-property/my-property.component';
 import { AppInitService, initializeApp1 } from './helper/app-init.service';
+import { AdminComponent } from './pages/admin/admin.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AppInitService, initializeApp1 } from './helper/app-init.service';
      SpinnerComponent,
     DashboardComponent,
     TimelinecardComponent,
-    MyPropertyComponent
+    MyPropertyComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

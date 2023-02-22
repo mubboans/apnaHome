@@ -33,13 +33,15 @@ export class LoginComponent implements OnInit {
     this.authlog.fnLogUser(this.logForm.value).subscribe((x:any)=>{
       console.log(x);
       
-      if(x.token){
+      if(x.success){
         this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});    
         setTimeout(()=>{
           const helper = new JwtHelperService();
-          this.storage.setToken(x.token);
-          const decoded= helper.decodeToken(x.token);
-          this.storage.setUserData(decoded);
+          console.log(x);
+          
+          // this.storage.setToken(x.token);
+          // const decoded= helper.decodeToken(x.token);
+          this.storage.setUserData(x);
           this.route.navigate(['/dashboard']);
         },1000)
         
