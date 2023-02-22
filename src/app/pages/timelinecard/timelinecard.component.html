@@ -1,0 +1,17 @@
+<div class="card">
+	<h5> Why Post through us?</h5>
+	<p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
+        <ng-template pTemplate="marker" let-event>
+			<span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color">
+                <i [ngClass]="event.icon"></i>
+            </span>
+		</ng-template>
+		<!-- <ng-template pTemplate="content" let-event>
+			<p-card [header]="event.status" [subheader]="event.date">
+			</p-card>
+		</ng-template> -->
+        <ng-template pTemplate="content" let-event>
+			<span>{{event.status}}</span>
+		</ng-template>
+	</p-timeline>
+</div>

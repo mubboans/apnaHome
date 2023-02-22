@@ -1,1 +1,306 @@
-<p>dashboard works!</p>
+<div class="p-grid p-ai-center">
+    <div class="p-col-8">
+        <h4 class="p-text-center text-3xl font-medium">Sell or Rent your Property For Free</h4>
+    </div>
+    <div class="p-col-4">
+        <p-button (click)="searchNow()" icon="pi pi-search-plus" label="Search"></p-button>
+    </div>
+</div>
+<div class="p-grid">
+
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+        <div class="mb-3 font-bold text-3xl">
+            <span class="text-900">One Product, </span>
+            <span class="text-blue-600">Many Solutions</span>
+        </div>
+        <div class="text-700 mb-6">Handpicked projects for you.</div>
+        <div class="grid">
+            <div class="col-12 md:col-4 mb-4 px-5">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-desktop text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">Built for Developers</div>
+                <span class="text-700 line-height-3">Easy listing property from mobile.</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-lock text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">End-to-End Encryption</div>
+                <span class="text-700 line-height-3">Data is encrypted by algorithm.</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-check-circle text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">Easy to Deal</div>
+                <span class="text-700 line-height-3">Shortlist with extensive data without visit .</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-globe text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">Fast & Global Support</div>
+                <span class="text-700 line-height-3">Based on very recent technology.</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-github text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">Open Source</div>
+                <span class="text-700 line-height-3">Free to use as and use as per requirement. </span>
+            </div>
+            <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
+                <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                    <i class="pi pi-shield text-4xl text-blue-500"></i>
+                </span>
+                <div class="text-900 text-xl mb-3 font-medium">Trusted Security</div>
+                <span class="text-700 line-height-3">You are no longer concerned with broker calls.</span>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="p-grid p-mx-auto p-px-6">
+
+    
+    <div class="p-col-12 p-md-12 p-lg-3 p-mx-auto p-mt-3 p-text-center">
+
+            <app-timelinecard></app-timelinecard>
+    </div>
+
+    <div class="p-col-12 p-md-12 p-lg-9 p-mx-auto p-px-4 p-mt-3">
+        <p-dataView #dv [value]="propArr" [paginator]="true" [rows]="5" filterBy="name"
+      [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+      <ng-template pTemplate="header">
+          <div class="flex flex-column md:flex-row md:justify-content-between">
+              <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
+              <span class="p-input-icon-left mb-2 md:mb-0">
+                  <i class="pi pi-search"></i>
+                  <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+              </span>
+              <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+      </ng-template>
+      <ng-template let-product pTemplate="listItem">
+          <div class="p-col-12">
+              <div class="product-list-item">
+                  <div class="product-list-detail">
+                      <div class="product-name">{{product.name}}</div>
+                      <div class="product-description">{{product.addres.add}}</div>
+                      <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                      <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.addres.city}}</span>
+                  </div>
+                  <div class="product-list-action">
+                      <span class="product-price">${{product.price}}</span>
+                      <p-button icon="pi pi-pencil" (click)="editProperty(product)" label="View"></p-button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProp(product)" label="Delete"></button>
+                      <!-- <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+      <ng-template let-product pTemplate="gridItem">
+          <div class="col-12 md:col-4">
+              <div class="product-grid-item card">
+                  <div class="product-grid-item-top">
+                      <div>
+                          <i class="pi pi-tag product-category-icon"></i>
+                          <span class="product-category">{{product.addres.add}}</span>
+                      </div>
+                      <span [class]="'product-badge status'">{{product.addres.city}}</span>
+                  </div>
+                  <div class="product-grid-item-content">
+                      <div class="product-name">{{product.name}}</div>
+                      <div class="product-description">{{product.addres.state}}</div>
+                      <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                  </div>
+                  <div class="product-grid-item-bottom">
+                      <span class="product-price">${{product.price}}</span>
+                      <p-button icon="pi pi-pencil" (click)="editProperty(product)"></p-button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProp(product)"></button>
+                    </div>
+              </div>
+          </div>
+      </ng-template>
+  </p-dataView>
+</div>
+
+</div>
+ 
+<p-toast position="bottom-right" [showTransformOptions]="'translateX(100%)'"></p-toast>
+ 
+
+
+
+ 
+
+
+
+<p-dialog header="Search Property" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [modal]="true" [style]="{width: '60vw'}" [(visible)]="searchprop">
+    <p-tabView>
+        <p-tabPanel leftIcon="pi pi-book" header="Buy" [selected]="true">
+            <h4 class="p-text-center">Buy Property</h4>
+            <form [formGroup]="buyForm" class="p-d-flex p-jc-center">
+            <div class="grid p-fluid p-d-flex p-jc-center">
+                <div class="p-col-12 p-md-8 p-ai-center p-as-center">
+                    <div class="p-inputgroup p-ai-center p-as-center">
+                        <!-- <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span> -->
+                        <p-dropdown placeholder="Select Cities" required [options]="city" formControlName="selectcities" optionValue="id" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4">
+                    <div class="p-inputgroup">
+                        
+                        <button pButton pRipple [disabled]="buyForm.invalid" type="button" label="Search" class="p-button-raised p-button-help p-button-text"></button>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                    <div class="p-inputgroup p-jc-around">
+                        <p-radioButton required label="Full House" value="full" formControlName="propertytype"></p-radioButton>
+                        <p-radioButton required value="land" label="Land/Plot" formControlName="propertytype"></p-radioButton>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4">
+              
+                    <div class="p-inputgroup">
+                     
+                        <p-dropdown placeholder="Select Type" required [options]="bhkarr" formControlName="bhktype" optionValue="value" optionLabel="type"></p-dropdown>  
+                    </div>
+                </div> 
+                <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                    
+                    <div class="p-inputgroup p-jc-around">
+                        
+                        <p-radioButton required  label="Ready" value="ready" formControlName="propertystatus"></p-radioButton>
+                        <p-radioButton required  value="underconstruction" label="Under-Contruction" formControlName="propertystatus"></p-radioButton> 
+                    </div>
+                </div>
+                </div>
+            </form>
+        </p-tabPanel>
+        <p-tabPanel header="Sell"  leftIcon="pi pi-bookmark">
+            <h4 class="p-text-center">Rent Property</h4>
+            <form [formGroup]="rentForm" class="p-d-flex p-jc-center">
+                <div class="grid p-fluid p-d-flex p-jc-center">
+                    <div class="p-col-12 p-md-8 p-ai-center p-as-center">
+                        <div class="p-inputgroup p-ai-center p-as-center">
+                            <!-- <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span> -->
+                            <p-dropdown placeholder="Select Cities" required [options]="city" formControlName="rselectcities" optionValue="id" optionLabel="name"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-4">
+                        <div class="p-inputgroup">
+                            
+                            <button pButton pRipple [disabled]="rentForm.invalid" type="button" label="Search" class="p-button-raised p-button-help p-button-text"></button>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                        <div class="p-inputgroup p-jc-around">
+                            <p-radioButton required  label="Full House" value="full" formControlName="rpropertytype"></p-radioButton>
+                            <p-radioButton required  value="land" label="Land/Plot" formControlName="rpropertytype"></p-radioButton>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-md-4">
+                  
+                        <div class="p-inputgroup">
+                         
+                            <p-dropdown placeholder="Select Type" required [options]="bhkarr" formControlName="rbhktype" optionValue="value" optionLabel="type"></p-dropdown>  
+                        </div>
+                    </div> 
+                    <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                        
+                        <div class="p-inputgroup p-jc-around">
+                            
+                            <p-radioButton required  label="Ready" value="ready" formControlName="rpropertystatus"></p-radioButton>
+                            <p-radioButton required  value="underconstruction" label="Under-Contruction" formControlName="rpropertystatus"></p-radioButton> 
+                        </div>
+                    </div>
+                    </div>
+                </form>
+    
+        </p-tabPanel>
+        <p-tabPanel header="Commercial" leftIcon="pi pi-briefcase">
+            <h4 class="p-text-center">Commercial Property</h4>
+            <form [formGroup]="comForm" class="p-d-flex p-jc-center">
+            <div class="grid p-fluid p-d-flex p-jc-center">
+                <div class="p-col-12 p-md-8 p-ai-center p-as-center">
+                    <div class="p-inputgroup p-ai-center p-as-center">
+                        <!-- <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span> -->
+                        <p-dropdown placeholder="Select Cities" required [options]="city" formControlName="cselectcities" optionValue="id" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4">
+                    <div class="p-inputgroup">
+                        
+                        <button pButton pRipple [disabled]="comForm.invalid" type="button" label="Search" class="p-button-raised p-button-help p-button-text"></button>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                    <div class="p-inputgroup p-jc-around">
+                        <p-radioButton required  label="Full House" value="full" formControlName="cpropertytype"></p-radioButton>
+                        <p-radioButton required  value="land" label="Land/Plot" formControlName="cpropertytype"></p-radioButton>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-4">
+              
+                    <div class="p-inputgroup">
+                     
+                        <p-dropdown placeholder="Select Type" required [options]="bhkarr" formControlName="cbhktype" optionValue="value" optionLabel="type"></p-dropdown>  
+                    </div>
+                </div> 
+                <div class="p-col-12 p-md-4 p-ai-center p-as-center">
+                    
+                    <div class="p-inputgroup p-jc-around">
+                        
+                        <p-radioButton required  label="Ready" value="ready" formControlName="cpropertystatus"></p-radioButton>
+                        <p-radioButton required  value="underconstruction" label="Under-Contruction" formControlName="cpropertystatus"></p-radioButton> 
+                    </div>
+                </div>
+                </div>
+            </form>
+        </p-tabPanel>
+    </p-tabView>
+</p-dialog>
+
+
+
+<p-dialog [(visible)]="postProperty" [style]="{width: '450px'}" header="Property Details" [modal]="true" styleClass="p-fluid">
+   <!-- <form name="propertyadd" #propertyadd="ngForm" novalidate="" (ngSubmit)="saveproperty(propertyadd)"> -->
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="propObject.name" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !propObject.name">Name is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="description">State</label>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.state" required rows="3" cols="20"/>
+        </div> 
+        <div class="p-field">
+            <label for="description">City</label>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.city" required rows="3" cols="20"/>
+        </div>
+         <div class="p-field">
+            <label for="description">Pincode</label>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.pincode" required rows="3" cols="20"/>
+        </div>
+         <div class="p-field">
+            <label for="description">Address</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="propObject.addres.add" required rows="3" cols="20"></textarea>
+        </div>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [(ngModel)]="propObject.price" mode="currency" currency="INR" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="postProperty=false"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" type="submit" (click)="saveproperty()"></button>
+    </ng-template>
+
+</p-dialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

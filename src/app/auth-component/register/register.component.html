@@ -1,33 +1,51 @@
-<div class="p-grid">
-    <div class="p-col-6">
-        <div class="p-card p-col-11 p-mx-auto p-px-4">
+<div class="p-grid p-mt-5">
+    <div class="p-card p-col-11 p-md-6 p-lg-4 p-mx-auto p-px-4">
+        <!-- <div class="p-card p-col-11 p-mx-auto p-px-4"> -->
     
             <form name="loginForm" [formGroup]="regForm">
                 <p class="p-text-muted">Creat Account</p>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" pInputText name="username" class="form-control" 
-                        placeholder="full name" formControlName="username" autocomplete="username" >
+                        placeholder="Username" formControlName="username" autocomplete="username" required>
+                </div>
+                <div class="error" *ngIf="formControl.username.errors && (formControl.username.touched  && formControl.username.invalid)">
+                    <small>Username Required</small>
                 </div>
                 <div class="p-inputgroup p-mb-3">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText name="username" class="form-control"
-                        placeholder="email address" formControlName="email" autocomplete="username" required>
+                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                    <input type="text" pInputText name="email" class="form-control"
+                        placeholder="Email" formControlName="email" autocomplete="email" required>
                 </div>
+                <div class="error" *ngIf="formControl.email.errors?.required && (formControl.email.touched && formControl.email.invalid)">
+                    <small>Email Required</small>
+                </div>
+                <small class="error" *ngIf="formControl.email.errors?.pattern">Not Valid Mail</small>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                    <input type="password" formControlName="password" pInputText name="password" class="form-control"
+                   <input type="{{!showpass ? 'password' : 'text'}}" formControlName="password" pInputText name="password" class="form-control"
                          placeholder="Password" autocomplete="current-password" required>
-                </div>
+                         <span class="p-inputgroup-addon eye-icon"><i (click)="showpass =! showpass" [ngClass]="!showpass ? 'pi pi-eye' : 'pi pi-eye-slash'"></i></span>
+                        </div>
+                        <div class="error" *ngIf="formControl.password.errors?.required && (formControl.password.touched && formControl.password.invalid)">
+                            <small>Password Required</small>
+                        </div>
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                    <input type="password" formControlName="confirmpassword" pInputText name="password" class="form-control"
+                    <input type="{{!showconfirmpass ?'password':'text'}}" formControlName="confirmpassword" pInputText name="password" class="form-control"
                         placeholder="Confirm Password" autocomplete="current-password" required>
+                        <span class="p-inputgroup-addon eye-icon"><i (click)="showconfirmpass =! showconfirmpass" [ngClass]="!showconfirmpass ? 'pi pi-eye' : 'pi pi-eye-slash'"></i></span>
+                    </div>
+                    <div class="error" *ngIf="formControl.confirmpassword.errors?.required && (formControl.confirmpassword.touched && formControl.confirmpassword.invalid)">
+                        <small>Confirm Password Required</small>
+                    </div>
+                    <small class="error" *ngIf="passwordmatch">Password Not Match</small>
+                <div class="p-inputgroup p-mb-3 p-jc-center">
+                    <span class="p-inputgroup-addon"><i class="pi pi-sitemap"></i></span>
+                        <p-dropdown  [style]="{'width':'220px'}" [options]="typearr" optionValue="value" required optionLabel="role" name="type" class="form-control drop" formControlName="type" placeholder="Select Insterest Type"></p-dropdown>
                 </div>
-                <div class="p-inputgroup p-mb-3">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" pInputText formControlName="type" name="username" class="form-control"
-                        placeholder="interests" autocomplete="username" required>
+                <div class="error" *ngIf="formControl.type.errors?.required && (formControl.type.touched && formControl.type.invalid)">
+                    <small>Please Choose Type</small>
                 </div>
                 <!-- <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -35,19 +53,16 @@
                         placeholder="preferred size" autocomplete="username" required>
                 </div> -->
              
-                <div class="p-inputgroup p-mb-3">
+                <div class="p-inputgroup p-mb-3 p-jc-center">
                 <p-checkbox label="newsletter"></p-checkbox>
                 </div>
-                <div class="p-inputgroup p-mb-3">
-    
-                    <p-checkbox label="by registering you agree with our t&c and privacy policy"></p-checkbox> 
-                </div>
-              
+                <button pButton type="button" routerLink="/login" label="Already account login" class="p-button-outlined p-mb-3"></button>
                     <button type="button" [disabled]="regForm.invalid" (click)="regUser()" pButton class="p-button-warn">Creat Account</button>
                 
             </form>
        
     
-        </div>
+        <!-- </div> -->
     </div>
 </div>
+<p-toast position="bottom-right" [showTransformOptions]="'translateX(100%)'"></p-toast>
