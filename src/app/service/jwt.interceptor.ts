@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -16,6 +17,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const data = JSON.parse(this.sto.getUserData())
     if(data){
+      
       const token =data.accessToken
       request=request.clone({     
           setHeaders: { Authorization: `Bearer ${token}` }
@@ -30,6 +32,11 @@ export class JwtInterceptor implements HttpInterceptor {
     }
 
   
-    return next.handle(request);
+    return next.handle(request).pipe(
+      finalize(()=>{
+         
+        this.sto.showLoader=false;
+      })
+    );
   }
 }

@@ -1,3 +1,103 @@
-<div class="grid p-ai-center">
-    
+<div class="grid p-ai-center p-mx-auto p-px-6">
+<div class="p-col-12 p-md-12 p-lg-10 p-mx-auto p-mt-3 p-text-center">
+    <p-orderList [value]="propArr" [listStyle]="{'max-height':'30rem'}" filterBy="name" filterPlaceholder="Filter by name" [dragdrop]="true">
+        <ng-template pTemplate="header">
+            <p-toolbar class="pToolbar">
+                <ng-template pTemplate="left"> <h4>List of Property</h4> </ng-template>
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                    </ng-template>
+                </p-toolbar>
+                <!-- pi-home -->
+        </ng-template>
+        <ng-template let-product pTemplate="item">
+            <div class="product-item">
+                <div class="image-container">
+                 <div *ngIf="product.img">
+                    <img src="{{product.img}}" [alt]="product.name" class="product-image"/>
+                 </div>
+                    
+                 <div *ngIf="!product.img">
+                    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                 </div>
+     
+                </div>
+                <!-- ng-repeat="item in product" *ngIf="product.addres.add" -->
+                <div class="product-list-detail" >
+                    <span *ngIf="product.addres"> 
+                        <h5 class="p-mb-2">{{product.name}}</h5>
+                        <i class="pi pi-tag product-category-icon"></i>
+                        <span class="product-category">{{product.addres.add}}</span>
+                    </span>
+                    <span *ngIf="!product.addres">-</span>
+                  
+                </div>
+                <div class="product-list-detail">
+                    <div *ngIf="product.addres">
+                    <h6 class="p-mb-2">${{product.price}}</h6>
+                    <span [class]="'product-badge status-' + product.addres.state.toLowerCase()">{{product.addres.state}}</span>
+                </div>
+                <div *ngIf="!product.addres"><span>-</span></div>
+                </div> 
+                <div class="product-list-action">
+                   
+                    <p-button icon="pi pi-pencil" (click)="editProperty(product)"></p-button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-ml-2" (click)="deleteProp(product)"></button> </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="empty" >
+            <div class="product-item p-text-center">
+                <span>No records found at this time</span>
+            </div>
+        </ng-template>
+    </p-orderList> 
 </div>
+     
+</div>
+<p-dialog [(visible)]="postPropertymodal" [style]="{width: '450px'}" header="Property Details" [modal]="true" styleClass="p-fluid">
+    <!-- <form name="propertyadd" #propertyadd="ngForm" novalidate="" (ngSubmit)="saveproperty(propertyadd)"> -->
+     <ng-template pTemplate="content">
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="img">Images</label>
+                <!-- <p-fileUpload  [(ngModel)]="propertyObject.tempimage" accept="image/*" accept="image/*" maxFileSize="1000000" 
+                 (uploadHandler)="myUploader($event)"></p-fileUpload> -->
+                <input type="file" id="name" [(ngModel)]="propertyObject.tempimage" required />
+            </div>
+        </div>
+         <div class="p-field">
+             <label for="name">Name</label>
+             <input type="text" pInputText id="name" [(ngModel)]="propertyObject.name" required autofocus />
+             <small class="p-invalid" *ngIf="submitted && !propertyObject.name">Name is required.</small>
+         </div>
+         <div class="p-field">
+             <label for="description">State</label>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.state" required rows="3" cols="20"/>
+         </div> 
+         <div class="p-field">
+             <label for="description">City</label>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.city" required rows="3" cols="20"/>
+         </div>
+          <div class="p-field">
+             <label for="description">Pincode</label>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.pincode" required rows="3" cols="20"/>
+         </div>
+          <div class="p-field">
+             <label for="description">Address</label>
+             <textarea id="description" pInputTextarea [(ngModel)]="propertyObject.addres.add" required rows="3" cols="20"></textarea>
+         </div>
+         <div class="p-formgrid p-grid">
+             <div class="p-field p-col">
+                 <label for="price">Price</label>
+                 <p-inputNumber id="price" [(ngModel)]="propertyObject.price" mode="currency" currency="INR" locale="en-IN" [minFractionDigits]="2"></p-inputNumber>
+             </div>
+         </div>
+     </ng-template>
+     
+     <ng-template pTemplate="footer">
+         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="postProperty=false"></button>
+         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" type="submit" (click)="saveproperty()"></button>
+     </ng-template>
+ 
+ </p-dialog>
+ <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

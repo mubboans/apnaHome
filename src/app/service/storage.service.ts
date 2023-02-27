@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class StorageService {
-
+  showLoader:boolean=true;
   constructor(public route:Router) { }
   
   setUserData(data){

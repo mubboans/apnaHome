@@ -20,7 +20,14 @@ export class PropertyServiceService {
       
     )
   }
+  getPropertyId(id){
 
+    return this.http.get(`${environment.serverUrl}prop/user=${id}`).pipe(
+      map(x=>{
+        return x;
+      }),catchError(this.handleError)
+    )
+  }
     addProperty(data):Observable<any>{
       return this.http.post<any>(`${environment.serverUrl}addProperty`,data).pipe(
         map(x=>{
