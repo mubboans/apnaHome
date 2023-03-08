@@ -27,6 +27,8 @@ import { TimelinecardComponent } from './pages/timelinecard/timelinecard.compone
 import { MyPropertyComponent } from './pages/my-property/my-property.component';
 import { AppInitService, initializeApp1 } from './helper/app-init.service';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AboutComponent } from './pages/about/about.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { AdminComponent } from './pages/admin/admin.component';
     DashboardComponent,
     TimelinecardComponent,
     MyPropertyComponent,
-    AdminComponent
+    AdminComponent,
+    AboutComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

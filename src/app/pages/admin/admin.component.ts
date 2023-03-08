@@ -100,12 +100,12 @@ saveProduct() {
     })
         }
         else{
-          this.proser.addProperty(this.propertyobj).subscribe((x:any)=>{
-            if(x){
-              this.messageService.add({severity:'success', summary:'Save', detail:'Successfull Property Save',life:2000});    
-              this.getProperty()
-            }
-          })
+          // this.proser.addProperty(this.propertyobj).subscribe((x:any)=>{
+          //   if(x){
+          //     this.messageService.add({severity:'success', summary:'Save', detail:'Successfull Property Save',life:2000});    
+          //     this.getProperty()
+          //   }
+          // })
         }
 
       this.productDialog = false;

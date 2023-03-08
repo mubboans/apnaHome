@@ -127,9 +127,9 @@
 
 
 
-<p-toast position="bottom-right"></p-toast>
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}" position="bottom-right"></p-toast>
 <p-dialog [(visible)]="displayModal" [style]="{width: '650px'}" header="Expenses Details" [modal]="true" styleClass="p-fluid">
-    <div class="p-fluid p-formgrid p-grid">
+    <div class="p-fluid p-form-grid p-grid">
         <div class="p-field col-6">
             <label for="name">Name</label>
             <input type="text" placeholder="Trip Name" pInputText id="name" [(ngModel)]="expenses.expensename" required autofocus />

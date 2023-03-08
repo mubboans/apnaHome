@@ -31,22 +31,33 @@ export class HeaderComponent implements OnInit {
         {name: 'Paris', code: 'PRS'}
     ];
     this.items = [
-      {
-        label:'Order List',
-        url:'productlist'
+    //   {
+    //     label:'Order List',
+    //     url:'productlist'
 
-    },
+    // },
     {
-        label:'Customer List',
-        url:'customerlist'  
+      label:'Dashboard',url:'dashboard', icon: 'pi pi-fw pi-chart-bar',
     },
     {
       label:'My Property',
-      url:'my-property'  
+      url:'my-property', icon: 'pi pi-fw pi-envelope',
     },
     {
-      label:'Dashboard',url:'dashboard'
-    }
+      label:'Privacy',
+      url:'privacy', icon: 'pi pi-fw pi-lock',
+    },
+    {
+        label:'About',
+        url:'about', icon: 'pi pi-fw pi-info-circle',
+
+    },
+    // {
+    //     label:'Customer List',
+    //     url:'customerlist'  
+    // },
+    
+    
   ];
 //   this.menuitem = [
 //     {label: 'lingerie', icon: 'pi pi-fw pi-home'},
