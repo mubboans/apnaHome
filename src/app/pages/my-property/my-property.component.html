@@ -35,7 +35,7 @@
                 <div class="product-list-detail">
                     <div *ngIf="product.addres">
                     <h6 class="p-mb-2">${{product.price}}</h6>
-                    <span [class]="'product-badge status-' + product.addres.state.toLowerCase()">{{product.addres.state}}</span>
+                    <span class="product-badge status" >{{product.addres.state}}</span>
                 </div>
                 <div *ngIf="!product.addres"><span>-</span></div>
                 </div> 
@@ -62,7 +62,7 @@
                 <label for="img">Images</label>
                 <!-- <p-fileUpload  [(ngModel)]="propertyObject.tempimage" accept="image/*" accept="image/*" maxFileSize="1000000" 
                  (uploadHandler)="myUploader($event)"></p-fileUpload> -->
-                <input type="file" id="name" [(ngModel)]="propertyObject.tempimage" required />
+                <input type="file" (change)="handleUpload($event)" id="name" accept="image/*" [(ngModel)]="tempimage" required />
             </div>
         </div>
          <div class="p-field">
@@ -101,3 +101,4 @@
  
  </p-dialog>
  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+ <p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}" position="bottom-right" [showTransformOptions]="'translateX(100%)'"></p-toast>

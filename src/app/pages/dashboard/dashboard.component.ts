@@ -64,6 +64,52 @@ export class DashboardComponent implements OnInit {
   sortOptions: any[];
   postProperty:boolean;
   submitted: boolean;
+  config:any;
+  data = {
+    labels: ['BUY','SELL','RENTED'],
+    datasets: [
+        {
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }
+    ]
+};
+radardata={
+  labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+  datasets: [
+      {
+          label: 'My First dataset',
+          backgroundColor: 'rgba(179,181,198,0.2)',
+          borderColor: 'rgba(179,181,198,1)',
+          pointBackgroundColor: 'rgba(179,181,198,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(179,181,198,1)',
+          data: [65, 59, 90, 81, 56, 55, 40]
+      },
+      {
+          label: 'My Second dataset',
+          backgroundColor: 'rgba(255,99,132,0.2)',
+          borderColor: 'rgba(255,99,132,1)',
+          pointBackgroundColor: 'rgba(255,99,132,1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(255,99,132,1)',
+          data: [28, 48, 40, 19, 96, 27, 100]
+      }
+  ]
+}
+  chartOptions: any;
+  radarchartOptions: any;
   constructor(public confirmationService:ConfirmationService,public messageService:MessageService,public storage:StorageService,public fb:FormBuilder,public proser:PropertyServiceService) {
     this.buyForm=fb.group({
       selectcities:fb.control('',Validators.required),
@@ -107,8 +153,37 @@ export class DashboardComponent implements OnInit {
     console.log(d,'local data',this.cities);
     this.getProperty();
     this.propObject=new propertyObj();
-    
+
+    this.updateChartOptions();
   }
+  updateChartOptions() {
+    this.chartOptions = this.config && this.config.dark ? this.getDarkTheme() : this.getLightTheme();
+    this.radarchartOptions=this.config && this.config.dark ? this.getDarkTheme() : this.getLightTheme();
+  }
+getLightTheme() {
+  return {
+      plugins: {
+          legend: {
+              labels: {
+                  color: '#495057'
+              }
+          }
+      }
+  }
+}
+
+getDarkTheme() {
+  return {
+      plugins: {
+          legend: {
+              labels: {
+                  color: '#ebedef'
+              }
+          }
+      }
+  }
+}
+
   openNew(){
    
     this.propObject = {};
@@ -146,12 +221,12 @@ this.proser.updateProperty(this.propObject,this.propObject._id).subscribe(x=>{
 })
     }
     else{
-      this.proser.addProperty(this.propObject).subscribe((x:any)=>{
-        if(x){
-          this.messageService.add({severity:'success', summary:'Save', detail:'Successfull Property Save',life:2000});    
-          this.getProperty()
-        }
-      })
+      // this.proser.addProperty(this.propObject).subscribe((x:any)=>{
+      //   if(x){
+      //     this.messageService.add({severity:'success', summary:'Save', detail:'Successfull Property Save',life:2000});    
+      //     this.getProperty()
+      //   }
+      // })
     }
     this.postProperty=false;
   }

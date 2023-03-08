@@ -50,12 +50,16 @@
 }
 @media screen and (max-width: 426px){
     :host::ng-deep{
+        .p-button {
+            margin: none !important;
+        }   
         .p-orderlist-controls {
             display: flex;
             flex-direction: column;
             justify-content: center;
             display: none;
 
+            
         }
         .p-orderlist .p-orderlist-list {
             font-size: 10px;
@@ -65,6 +69,7 @@
             padding: 0.5rem 0;
             height: 1.5rem;
         }
+        
     }
    
     img{

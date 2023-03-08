@@ -55,7 +55,7 @@
     </p-table> 
     </div>
 </div>
-<p-toast position="bottom-right"></p-toast>
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}" position="bottom-right"></p-toast>
 <p-dialog [(visible)]="custmodal" [style]="{width: '900px'}" header="Customer Details" [modal]="true"
   styleClass="p-fluid">
   <div class="p-fluid p-formgrid p-grid">

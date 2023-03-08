@@ -3,11 +3,12 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -23,19 +24,25 @@ export class JwtInterceptor implements HttpInterceptor {
           setHeaders: { Authorization: `Bearer ${token}` }
          });
     }
-    else{
-      request=request.clone({
-        setHeaders:{
-          'Content-Type':'application/json'
-        }
-       });
-    }
+    // else{
+    //   request=request.clone({
+    //     setHeaders:{
+    //       'Content-Type':'application/json'
+    //     }
+    //    });
+    // }
 
   
     return next.handle(request).pipe(
       finalize(()=>{
          
         this.sto.showLoader=false;
+      }),
+      catchError((err)=>{
+        if(err instanceof HttpErrorResponse && err.status == 401 && (!request.url.includes('login'))|| !request.url.includes('register')  ){
+           this.sto.logoutUser()      
+           return Observable.throw(err.message);      
+        }
       })
     );
   }
