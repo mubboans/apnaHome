@@ -10,6 +10,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MyPropertyComponent } from './pages/my-property/my-property.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { RentalComponent } from './pages/rental/rental.component';
 
 import { ProductListComponent } from './product-list/product-list.component';
 
@@ -30,7 +32,12 @@ const routes: Routes = [
   {
     path:'register',component:RegisterComponent
   },
- 
+  {
+    path:'profile',component:ProfileComponent
+  },
+  {
+path:'rental',component:RentalComponent
+  },
   {
     path:'my-property',component:MyPropertyComponent,canActivate:[RouteGuardGuard]
   },
@@ -45,7 +52,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

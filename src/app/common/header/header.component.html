@@ -9,7 +9,7 @@
     
     <ng-template pTemplate="end">
        
-     <p-tag icon="pi pi-user" class="p-mr-2" value="{{uname}}" severity="success"></p-tag> 
+     <p-tag icon="pi pi-info-circle" class="p-mr-2" (click)="routeProfile()" value="{{uname}}" severity="success"></p-tag> 
         <!-- <button pButton pRipple type="button" icon="pi pi-search" class="p-button-outlined p-button-rounded"></button> -->
         <button pButton pRipple type="button" (click)="fnLogout()" icon="pi pi-user" label="Logout" class="p-button-outlined p-button-rounded"></button> 
         <!-- <button pButton pRipple type="button" icon="pi pi-heart" class="p-button-outlined p-button-rounded"></button>

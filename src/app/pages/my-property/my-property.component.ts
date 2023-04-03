@@ -35,7 +35,7 @@ export class MyPropertyComponent implements OnInit {
     console.log(d.data);
     const id=d.data.id
     this.proser.getPropertyId(id).subscribe((x:any)=>{
-      this.propArr=x
+      this.propArr=x.data
       console.log(this.propArr,'data from server');
     })
   }
@@ -105,9 +105,12 @@ this.proser.updateProperty(this.formData,this.propertyObject._id).subscribe(x=>{
           this.messageService.add({severity:'success', summary:'Save', detail:'Successfull Property Save',life:2000});    
           this.getPropertyById()
         }
+      },(err)=>{
+        console.log(err);
+        this.messageService.add({severity:'error', summary:err.error.error, detail:err.error.mesagge,life:2000});    
       })
     }
-    this.postPropertymodal=false;
+    this.postPropertymodal=false; 
   }
   editProperty(product){
     this.formData = new FormData();

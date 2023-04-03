@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   serverUrl:'https://restapiwithmango-production.up.railway.app/'
+  // serverUrl:'http://localhost:3000/'
 };
 
 /*

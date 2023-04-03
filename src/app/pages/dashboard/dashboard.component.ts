@@ -65,6 +65,8 @@ export class DashboardComponent implements OnInit {
   postProperty:boolean;
   submitted: boolean;
   config:any;
+  imgSrc:string;
+  viewImage:boolean=false;
   data = {
     labels: ['BUY','SELL','RENTED'],
     datasets: [
@@ -84,10 +86,10 @@ export class DashboardComponent implements OnInit {
     ]
 };
 radardata={
-  labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+  labels: ['Home', 'Villa', '1BHK', '2BHK', '3BHK', 'Hall', 'RK'],
   datasets: [
       {
-          label: 'My First dataset',
+          label: 'Sell',
           backgroundColor: 'rgba(179,181,198,0.2)',
           borderColor: 'rgba(179,181,198,1)',
           pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -97,7 +99,7 @@ radardata={
           data: [65, 59, 90, 81, 56, 55, 40]
       },
       {
-          label: 'My Second dataset',
+          label: 'Buy',
           backgroundColor: 'rgba(255,99,132,0.2)',
           borderColor: 'rgba(255,99,132,1)',
           pointBackgroundColor: 'rgba(255,99,132,1)',
@@ -183,6 +185,13 @@ getDarkTheme() {
       }
   }
 }
+onClick(event){
+  const imgElem = event.target;
+  this.viewImage=true;
+  var target = event.target || event.srcElement || event.currentTarget;
+  var srcAttr = target.attributes.src;
+  this.imgSrc = srcAttr.nodeValue;
+}
 
   openNew(){
    
@@ -242,7 +251,7 @@ this.proser.updateProperty(this.propObject,this.propObject._id).subscribe(x=>{
   }
   getProperty(){
     this.proser.getProperty().subscribe((x:any)=>{
-      this.propArr=x
+      this.propArr=x.data
       console.log(this.propArr,'data from server');
       
     })

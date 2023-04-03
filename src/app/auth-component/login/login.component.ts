@@ -36,18 +36,17 @@ export class LoginComponent implements OnInit {
       if(x.success){
         this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});    
         setTimeout(()=>{
-          const helper = new JwtHelperService();
-          console.log(x);
-          
-          // this.storage.setToken(x.token);
-          // const decoded= helper.decodeToken(x.token);
           this.storage.setUserData(x);
           this.route.navigate(['/dashboard']);
         },1000)
-        
-
-        
       }
+      // else{
+      //   this.messageService.add({severity:'error', summary:'Verify User Failed', detail:"Can't Login with this credential",life:2000});    
+      // }
+    },(err)=>{
+      this.messageService.add({severity:'error', summary:'Error', detail:err.error.status,life:2000});    
+      // console.log();
+      
     })
   }
 

@@ -29,6 +29,8 @@ import { AppInitService, initializeApp1 } from './helper/app-init.service';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { RentalComponent } from './pages/rental/rental.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { PrivacyComponent } from './pages/privacy/privacy.component';
     MyPropertyComponent,
     AdminComponent,
     AboutComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    RentalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

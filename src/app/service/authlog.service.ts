@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators'; 
-import { Observable, throwError } from 'rxjs';
-
+import { Observable } from 'rxjs';
+import { throwError } from 'rxjs';
 import { Expo } from '../home/home.component';
 import { environment } from 'src/environments/environment';
 
@@ -44,7 +44,7 @@ getUsers():Observable<any>{
  )
 
 }
-handleError(error?:HttpErrorResponse) {
+handleError(error?:HttpErrorResponse){
   return throwError(error || "Server Errors")
 }
 }

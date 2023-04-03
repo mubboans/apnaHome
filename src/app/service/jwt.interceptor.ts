@@ -6,14 +6,15 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 import { catchError, finalize } from 'rxjs/operators';
+import { MessageService } from 'primeng-lts/api';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(public sto:StorageService) {}
+  constructor(public sto:StorageService,public mess:MessageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const data = JSON.parse(this.sto.getUserData())
@@ -40,8 +41,18 @@ export class JwtInterceptor implements HttpInterceptor {
       }),
       catchError((err)=>{
         if(err instanceof HttpErrorResponse && err.status == 401 && (!request.url.includes('login'))|| !request.url.includes('register')  ){
-           this.sto.logoutUser()      
-           return Observable.throw(err.message);      
+          //  this.mess.add({severity:'error', summary:'Error Occured in Api', detail:'Error in api yu will be logout',life:2000});    
+           console.log(err,'jwt err',request.url);
+           if(err.error.status === 'Failed To Authenticate' || err.error.mesagge || err.error.success == false){
+            if(!request.url.includes('/login')){
+              this.mess.add({severity:'error', summary:'Authentication Failed', detail:'Token Expired',life:2000});    
+            }
+            setTimeout(()=>{
+              this.sto.logoutUser() 
+             },2000)  
+           }
+            
+           return throwError(err);      
         }
       })
     );
