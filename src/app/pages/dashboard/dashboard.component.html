@@ -6,32 +6,13 @@
         <p-button (click)="searchNow()" icon="pi pi-search-plus" label="Search"></p-button>
     </div>
 </div>
-<div class="p-grid p-ai-center">
-    <!-- <h5 class="p-text-center">MONTHLY SUMMARY</h5> -->
-    <div class="p-col-12 p-md-6">
-        
-           
-            <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
-        
-    </div>
-    <div class="p-col-12 p-md-6">
 
-        <p-chart type="radar" [data]="radardata" [options]="radarchartOptions" [style]="{'width': '40%'}"></p-chart>
-
-    </div>
-</div>
 
     <div class="p-grid p-mx-auto p-px-6">
+    <div class="p-col-12 p-md-12 p-lg-11 p-mx-auto p-px-4 p-mt-3">
 
-    
-    <div class="p-col-12 p-md-12 p-lg-3 p-mx-auto p-mt-3 p-text-center">
-
-            <app-timelinecard></app-timelinecard>
-    </div>
-
-    <div class="p-col-12 p-md-12 p-lg-9 p-mx-auto p-px-4 p-mt-3">
         <p-dataView #dv [value]="propArr" [paginator]="true" [rows]="5" filterBy="name"
-      [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+      layout="grid">
       <ng-template pTemplate="header">
           <div class="flex flex-column md:flex-row md:justify-content-between">
               <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
@@ -39,24 +20,65 @@
                   <i class="pi pi-search"></i>
                   <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
               </span>
-              <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+              <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button> -->
               <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
           </div>
       </ng-template>
       <ng-template let-product pTemplate="listItem">
+        <div class="col-12">
+            <div class="product-list-item">
+                <img (click)="onClick($event)" height="100" width="140" [src]="product.img" [alt]="product.name"/>
+                <div class="product-list-detail">
+                    <div class="product-name">{{product.name}}</div>
+                    <div class="product-description">{{product.addres.city}}</div>
+                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                    <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.addres.state}}</span>
+                </div>
+                <div class="product-list-action">
+                    <span class="product-price">₹{{product.price}}</span>
+                    <p-button icon="pi pi-shopping-cart"></p-button>
+                    
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-product pTemplate="gridItem">
+        <div class="col-12 md:col-4">
+            <div class="product-grid-item card">
+                <div class="product-grid-item-top">
+                    <div>
+                        <i class="pi pi-tag product-category-icon"></i>
+                        <span class="product-category">{{product.addres.state}}</span>
+                    </div>
+                    
+                </div>
+                <div class="product-grid-item-content">
+                    <img (click)="onClick($event)" height="80" width="100" [src]="product.img" [alt]="product.name"/>
+                    <div class="product-name">{{product.name}}</div>
+                    <div class="product-description">{{product.addres.city}}</div>
+                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                </div>
+                <div class="product-grid-item-bottom">
+                    <span class="product-price">₹{{product.price}}</span>
+                    <p-button icon="pi pi-shopping-cart"></p-button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+      <!-- <ng-template let-product pTemplate="listItem">
           <div class="p-col-12">
               <div class="product-list-item">
                   <div class="product-list-detail">
                       <div class="product-name">{{product.name}}</div>
                       <div class="product-description">{{product.addres.add}}</div>
-                      <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                       <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
                       <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.addres.city}}</span>
                   </div>
                   <div class="product-list-action">
                       <span class="product-price">${{product.price}}</span>
                       <p-button icon="pi pi-pencil" (click)="editProperty(product)" label="View"></p-button>
                       <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProp(product)" label="Delete"></button>
-                      <!-- <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+                       <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> 
                   </div>
               </div>
           </div>
@@ -74,7 +96,7 @@
                   <div class="product-grid-item-content">
                       <div class="product-name">{{product.name}}</div>
                       <div class="product-description">{{product.addres.state}}</div>
-                      <!-- <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> -->
+                       <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
                   </div>
                   <div class="product-grid-item-bottom">
                       <span class="product-price">${{product.price}}</span>
@@ -83,12 +105,24 @@
                     </div>
               </div>
           </div>
-      </ng-template>
+      </ng-template> -->
   </p-dataView>
+</div>  
 </div>
+<div class="p-grid p-ai-center p-mb-4">
+    <!-- <h5 class="p-text-center">MONTHLY SUMMARY</h5> -->
+    <div class="p-col-12 p-md-6">
+        
+           
+            <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+        
+    </div>
+    <div class="p-col-12 p-md-6">
 
+        <p-chart type="radar" [data]="radardata" [options]="radarchartOptions" [style]="{'width': '40%'}"></p-chart>
+
+    </div>
 </div>
- 
 <p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}" position="bottom-right" [showTransformOptions]="'translateX(100%)'"></p-toast>
  
 
@@ -224,9 +258,18 @@
     </p-tabView>
 </p-dialog>
 
+<p-dialog [(visible)]="viewImage" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '60vwpx'}" header="Property Images" [modal]="true" styleClass="p-fluid">
 
+    <img
+    src="{{imgSrc}}"
+    width="500"     
 
-<p-dialog [(visible)]="postProperty" [style]="{width: '450px'}" header="Property Details" [modal]="true" styleClass="p-fluid">
+    style="cursor:pointer;max-heigth:50%;"
+    class="modal-hover-opacity"
+  />
+</p-dialog>
+
+<p-dialog [(visible)]="postProperty" [style]="{width: '60vw'}" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" header="Property Details" [modal]="true" styleClass="p-fluid">
    <!-- <form name="propertyadd" #propertyadd="ngForm" novalidate="" (ngSubmit)="saveproperty(propertyadd)"> -->
     <ng-template pTemplate="content">
         <div class="p-field">

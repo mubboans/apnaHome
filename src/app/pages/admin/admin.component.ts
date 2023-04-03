@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng-lts/api';
+import { AdminserviceService } from 'src/app/service/adminservice.service';
 import { PropertyServiceService } from 'src/app/service/property-service.service';
 import { StorageService } from 'src/app/service/storage.service';
 
@@ -18,14 +19,29 @@ export class AdminComponent implements OnInit {
   sortOrder: number;
   sortField: string;
   sortOptions: any[];
-  constructor(public confirmationService:ConfirmationService,public messageService:MessageService,public storage:StorageService,public fb:FormBuilder,public proser:PropertyServiceService) { }
+  userData:any[];
+  constructor(public adminser:AdminserviceService,public confirmationService:ConfirmationService,public messageService:MessageService,public storage:StorageService,public fb:FormBuilder,public proser:PropertyServiceService) { }
 
   ngOnInit(): void {
     this.getProperty(); 
+    this.getUser()
+  }
+  getUser(){
+    this.adminser.getAllUser().subscribe((x:any)=>{
+      if(x.success){
+        this.userData = x.data;
+        console.log(this.userData);
+        
+      }
+    },
+    (err:any)=>{
+
+    }
+    )
   }
   getProperty(){
     this.proser.getProperty().subscribe((x:any)=>{
-      this.property=x
+      this.property=x.data
       console.log(this.property,'data from server');
       
     })

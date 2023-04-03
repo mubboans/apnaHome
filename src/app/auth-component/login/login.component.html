@@ -4,8 +4,8 @@
     <div class="p-card p-col-11 p-md-6 p-lg-4 p-mx-auto p-px-4">
         <!-- <div class="p-card p-col-10 "> -->
             <form name="loginForm" [formGroup]="logForm">
-                <h5 class="text-2xl p-text-center">welcome, please log in/create account </h5>
-                <p class="p-text-muted">log in</p>
+                <h5 class="text-2xl p-text-center">welcome, please log in </h5>
+                <!-- <p class="p-text-muted  p-text-center"></p> -->
                 <div class="p-inputgroup p-mb-3">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" pInputText name="username" class="form-control" formControlName="username"
@@ -25,8 +25,8 @@
                 </div>
                 <div class="p-text-center p-my-3">OR
                     <div class="p-d-flex p-jc-between">
-                        <button icon="pi pi-facebook" type="button" pButton label="Sign in with facebook" class="p-button-secondary" ></button>
-                        <button icon="pi pi-google" type="button" pButton label="Sign in with Google"  class="p-button-primary p-ml-2"></button>
+                        <button icon="pi pi-facebook" [disabled]="true" type="button" pButton label="Sign in with facebook" class="p-button-secondary" ></button>
+                        <button icon="pi pi-google" type="button" [disabled]="true" pButton label="Sign in with Google"  class="p-button-primary p-ml-2"></button>
                     </div>
                 </div>
                 

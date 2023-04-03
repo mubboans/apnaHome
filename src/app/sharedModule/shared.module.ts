@@ -48,6 +48,7 @@ import { ConfirmationService, MessageService } from 'primeng-lts/api';
 import {PasswordModule} from 'primeng-lts/password';
 import {OrderListModule} from 'primeng-lts/orderlist';
 import {ChartModule} from 'primeng-lts/chart';
+
 @NgModule({
   declarations: [],
   imports: [

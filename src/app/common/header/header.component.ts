@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng-lts/api/menuitem';
 import {TabMenuModule} from 'primeng-lts/tabmenu';
 import {MenubarModule} from 'primeng-lts/menubar';
 import { StorageService } from 'src/app/service/storage.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +11,7 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public sto:StorageService) { }
+  constructor(public sto:StorageService,public router:Router) { }
   items: MenuItem[];
   menuitem: MenuItem[];
   uname:string;
@@ -37,21 +38,30 @@ export class HeaderComponent implements OnInit {
 
     // },
     {
-      label:'Dashboard',url:'dashboard', icon: 'pi pi-fw pi-chart-bar',
+      label:'Dashboard',routerLink:'dashboard', icon: 'pi pi-fw pi-chart-bar',
     },
     {
       label:'My Property',
-      url:'my-property', icon: 'pi pi-fw pi-envelope',
+      routerLink:'my-property', icon: 'pi pi-fw pi-envelope',
     },
     {
       label:'Privacy',
-      url:'privacy', icon: 'pi pi-fw pi-lock',
+      routerLink:'privacy', icon: 'pi pi-fw pi-lock',
     },
     {
         label:'About',
-        url:'about', icon: 'pi pi-fw pi-info-circle',
-
+        routerLink:'about', icon: 'pi pi-fw pi-info-circle',
     },
+    {
+      label:'Rent',
+      routerLink:'rental',icon: 'pi pi-fw pi-home',
+    },
+    {
+      label:'Admin',
+      routerLink:'admin',
+      icon: 'pi pi-fw pi-briefcase',
+      visible:d.user_role == 1
+    }
     // {
     //     label:'Customer List',
     //     url:'customerlist'  
@@ -69,6 +79,9 @@ export class HeaderComponent implements OnInit {
 //     {label: 'plus size', icon: 'pi pi-fw pi-book'},
 //     {label: 'loungewear', icon: 'pi pi-fw pi-thumbs-up'},
 // ];
+  }
+  routeProfile(){
+    this.router.navigate(['/profile'])
   }
   fnLogout(){
     this.sto.logoutUser()
