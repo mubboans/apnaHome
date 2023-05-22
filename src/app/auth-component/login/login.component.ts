@@ -27,6 +27,22 @@ export class LoginComponent implements OnInit {
     console.log(k);
     
   }
+  openGoogle(){
+    
+    this.authlog.fnRegisterWithGoogle().subscribe((x:any)=>{
+      console.log(x);
+      if(x.success){
+        this.messageService.add({severity:'success', summary:'Verify User', detail:'Successfull Login',life:2000});    
+        setTimeout(()=>{
+          this.storage.setUserData(x);
+          this.route.navigate(['/dashboard']);
+        },1000)
+      }
+      console.log(x,'32');
+    })
+    // window.open("http://localhost:3000/auth/google/callback", "_blank");
+    // window.location.href = 'http://localhost:3000/auth/google/callback';
+  }
   loginUser(){
     
     // console.log(this.username,this.password,"value Check",JSON.stringify(d));

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  serverUrl:'https://restapiwithmango-production.up.railway.app/'
+  serverUrl:'https://strange-earmuffs-clam.cyclic.app/'
+  // serverUrl:'https://restapiwithmango-production.up.railway.app/'
+  // serverUrl:'https://rental-restapi.onrender.com/'
   // serverUrl:'http://localhost:3000/'
 };
 
