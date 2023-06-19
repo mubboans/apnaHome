@@ -31,6 +31,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { RentalComponent } from './pages/rental/rental.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { CheckuserComponent } from './auth-component/checkuser/checkuser.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AboutComponent,
     PrivacyComponent,
     RentalComponent,
-    ProfileComponent
+    ProfileComponent,
+    CheckuserComponent
   ],
   imports: [
     BrowserModule,

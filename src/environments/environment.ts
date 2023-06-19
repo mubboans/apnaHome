@@ -8,7 +8,7 @@ export const environment = {
   // serverUrl:'https://restapiwithmango-production.up.railway.app/'
   // serverUrl:'https://rental-restapi.onrender.com/'
   // serverUrl:'http://localhost:3000/'
-};
+}; 
 
 /*
  * For easier debugging in development mode, you can import the following file

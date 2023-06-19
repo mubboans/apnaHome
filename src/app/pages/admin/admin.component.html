@@ -89,7 +89,7 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                      
+                            <th>Image</th>
                             <th pSortableColumn="name">User-Name <p-sortIcon field="name"></p-sortIcon></th>
                             <th pSortableColumn="price">Email <p-sortIcon field="price"></p-sortIcon></th>
                             <th pSortableColumn="rating">Password<p-sortIcon field="rating"></p-sortIcon></th>
@@ -100,7 +100,10 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
                         <tr>
-                           
+                          
+                            <td>
+                                <img src={{product.profileImg}} alt="avatar" width="100" class="p-shadow-4" /></td>
+                         
                             <td>{{product.username | uppercase}}</td>
                             <td>{{product.email}}</td>
                             <td>{{product.password}}</td>

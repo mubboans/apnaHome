@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ConfirmationService, MessageService } from 'primeng-lts/api';
 import { Addressdetail, propertyObj } from 'src/app/model/property';
 import { PropertyServiceService } from 'src/app/service/property-service.service';

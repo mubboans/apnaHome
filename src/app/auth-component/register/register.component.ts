@@ -48,13 +48,17 @@ export class RegisterComponent implements OnInit {
 regUser(){
   this.authlog.fnRegisterUser(this.regForm.value).subscribe((x:any)=>{
     console.log("Register");
-    if(x.staus){
+    if(x.success){
       this.messageService.add({severity:'success', summary:'Register User', detail:'Login with Username',life:2000});    
      setTimeout(()=>{
       this.route.navigate(['/login']);
      },1000)
      
     }
+  },(err)=>{
+    console.log(err);
+    
+    this.messageService.add({severity:'error', summary:'User Register Failed', detail:'Already exist',life:2000});    
   })
 }
 }

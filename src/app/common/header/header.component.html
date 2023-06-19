@@ -8,21 +8,44 @@
     </ng-template>
     
     <ng-template pTemplate="end">
+
+
+        <ul class="list-none p-0 m-0 hidden lg:flex lg:align-items-center select-none lg:flex-row surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static">
+            <li>
+                <a class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                    <p-tag icon="pi pi-info-circle" class="p-mr-2"  value="{{uname}}" severity="success"></p-tag> 
+                </a>
+            </li>
+                <li>
+                    <a class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                        <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge">
+                            <span class="p-badge p-component p-badge-dot p-badge-danger"></span>
+                        </i><span class="block lg:hidden font-medium">Notifications</span>
+                        <span role="presentation" class="p-ink" style="height: 56px; width: 56px;"></span>
+                    </a>
+                </li>
+                <li class="border-top-1 surface-border lg:border-top-none">
+                    <a class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                        <img (click)="routeProfile()" src={{imgurl}} alt="avatar" class="mr-3 lg:mr-0" style="width: 32px; height: 32px;">
+                    <span role="presentation" class="p-ink" style="height: 64px; width: 64px; top: -9.66667px; left: -9.66675px;">
+                    </span></a></li>
+                </ul>
        
-     <p-tag icon="pi pi-info-circle" class="p-mr-2" (click)="routeProfile()" value="{{uname}}" severity="success"></p-tag> 
-        <!-- <button pButton pRipple type="button" icon="pi pi-search" class="p-button-outlined p-button-rounded"></button> -->
+        <!-- <p-chip label="{{uname}}"></p-chip>
+
+     <p-tag icon="pi pi-info-circle" class="p-mr-2" (click)="routeProfile()" value="{{uname}}" severity="success"></p-tag>  -->
         <button pButton pRipple type="button" (click)="fnLogout()" icon="pi pi-user" label="Logout" class="p-button-outlined p-button-rounded"></button> 
-        <!-- <button pButton pRipple type="button" icon="pi pi-heart" class="p-button-outlined p-button-rounded"></button>
-         <button pButton pRipple type="button" icon="pi pi-wallet" class="p-button-outlined p-button-rounded"></button>     -->
-    
-         <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity1" placeholder="Select a City" optionLabel="name"
-         [showClear]="true"></p-dropdown> -->
          
     </ng-template>
 </p-menubar>
-<div class="p-grid p-d-flex p-jc-center">
-    <div class="p-col-12 p-text-center">
-        
-        <p-tabMenu [model]="menuitem" [activeItem]="activeItem"></p-tabMenu>
-    </div>
-</div>
+<p-dialog header="Change Email" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+ [modal]="true" [style]="{width: '60vw'}" [(visible)]="showEmailDialog">
+    <!-- <div class=" shadow-2 p-4"> -->
+        <div class="text-900 font-medium mb-2 text-xl">Change Email</div><p class="mt-0 mb-4 p-0 line-height-3">
+            It seems that your email is "DEMO@GMAIL.COM".</p><div class="flex">
+                <input class="p-inputtext p-component flex-auto mr-3">
+                <button aria-label="Update" routerLink="/profile" (click)="showEmailDialog=false" class="p-button p-component"><span class="p-button-label p-c">
+                    Update</span><span role="presentation" class="p-ink" style="height: 96.1667px; width: 96.1667px;">
+                    </span></button></div>
+                <!-- </div> -->
+</p-dialog>

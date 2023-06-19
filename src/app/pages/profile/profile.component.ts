@@ -26,12 +26,12 @@ userID:any;
   }
   getRole(text){
     switch(text){
-      case  1:
+      case "1":
       return 'Admin' 
-      case 2:
+      case "2":
       return 'Users'
       default :
-      return 'Admin'
+      return 'Checking'
     }
   }
   updateuser(){
@@ -44,21 +44,16 @@ userID:any;
     }
     this.userservice.updateUserbyId(this.user._id,data).subscribe((x:any)=>{
       console.log(x)
-      if(x){
+      if(x.success){
         this.messageService.add({severity:'custom', summary:'Update', detail:'Successfull Update Profile',life:2000});    
         this.getUserbyId(this.user._id);
       }
-    },(err)=>{
-      this.messageService.add({severity:'error', summary:'Failed', detail:'Error in Update Profile',life:2000});    
     })
   }
   getUserbyId(id){
     this.userservice.getUserbyId(id).subscribe((x:any)=>{
       console.log(x);
     this.user=x.data
-
-    },(err)=>{
-
     })
   }
 }

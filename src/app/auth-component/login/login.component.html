@@ -26,7 +26,7 @@
                 <div class="p-text-center p-my-3">OR
                     <div class="p-d-flex p-jc-between">
                         <!-- [disabled]="true"  -->
-                        <button icon="pi pi-facebook" [disabled]="true" type="button" pButton label="Sign in with facebook" class="p-button-secondary" ></button>
+                        <button icon="pi pi-facebook" (click)="openFacebook()" type="button" pButton label="Sign in with facebook" class="p-button-secondary" ></button>
                         <button icon="pi pi-google" (click)="openGoogle()" type="button" pButton label="Sign in with Google"  class="p-button-primary p-ml-2"></button>
                     </div>
                 </div>

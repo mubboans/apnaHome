@@ -15,6 +15,8 @@ export class AuthlogService {
  url = "https://admin.eniola.app/api/v1/login";
   constructor(public http:HttpClient) { }
   fnRegisterWithGoogle(){
+    console.log('google');
+    
     return this.http.get(`${environment.serverUrl}auth/google/callback`).pipe(map(x=>{
       return x
     }),catchError(this.handleError))

@@ -25,15 +25,7 @@ export class JwtInterceptor implements HttpInterceptor {
           setHeaders: { Authorization: `Bearer ${token}` }
          });
     }
-    // else{
-    //   request=request.clone({
-    //     setHeaders:{
-    //       'Content-Type':'application/json'
-    //     }
-    //    });
-    // }
 
-  
     return next.handle(request).pipe(
       finalize(()=>{
          
@@ -43,13 +35,18 @@ export class JwtInterceptor implements HttpInterceptor {
         if(err instanceof HttpErrorResponse && err.status == 401 && (!request.url.includes('login'))|| !request.url.includes('register')  ){
           //  this.mess.add({severity:'error', summary:'Error Occured in Api', detail:'Error in api yu will be logout',life:2000});    
            console.log(err,'jwt err',request.url);
-           if(err.error.status === 'Failed To Authenticate' || err.error.mesagge || err.error.success == false){
-            if(!request.url.includes('/login')){
-              this.mess.add({severity:'error', summary:'Authentication Failed', detail:'Token Expired',life:2000});    
+           if(err.error && err.error.success == false){
+            if(err.error.status === 'invalid token'){
+              this.mess.add({severity:'error', summary:'Authentication Failed', detail:'Your Token Has Expired',life:2000});    
+              setTimeout(()=>{
+                this.sto.logoutUser() 
+               },2000)  
             }
-            setTimeout(()=>{
-              this.sto.logoutUser() 
-             },2000)  
+            else{
+              if(!request.url.includes('/login')){
+                this.mess.add({severity:'error', summary:err.error.message, detail:err.error.status,life:2000});    
+              }
+            } 
            }
             
            return throwError(err);      
