@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   showEmailDialog:boolean=false;
   userdata:any;
   imgurl:string;
+  userrole:string;
   ngOnInit(): void {
 
    this.userdata=JSON.parse(this.sto.getUserData())
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit {
    this.uname=d.username;
    this.useremail=d.email;
    this.imgurl=this.userdata.profimg;
-   console.log(this.userdata,'Check',this.imgurl);
+   this.userrole=d.user_role
+   console.log(this.userdata,'Check',this.imgurl,d);
     if(this.useremail == 'demo@gmail.com'){
       this.showEmailDialog=true;
     }

@@ -46,7 +46,7 @@ path:'rental',component:RentalComponent
     path:'about',component:AboutComponent,canActivate:[]
   },
   {
-  path:'privacy',component:PrivacyComponent,canActivate:[RouteGuardGuard]
+  path:'privacy',component:PrivacyComponent
   },
   {path:'admin',component:AdminComponent},
   {
