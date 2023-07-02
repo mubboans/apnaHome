@@ -44,13 +44,13 @@
 
 <div class="ng-star-inserted" style="/* height: 400px; */">
     <div class="bg-indigo-500 px-6 shadow-2 flex relative lg:static" >
-        <div pstyleclass="#profile-10" enterclass="hidden" enteractiveclass="scalein" leavetoclass="hidden"
+        <div routerLink="/profile" pstyleclass="#profile-10" enterclass="hidden" enteractiveclass="scalein" leavetoclass="hidden"
             leaveactiveclass="fadeout"
             class="p-element cursor-pointer flex p-3 align-items-center hover:bg-indigo-600 transition-colors transition-duration-150 relative select-none">
             <img src={{imgurl}} class="lg:mr-3" style="width: 40px; height: 40px;">
             <div class="hidden lg:block"><span
                     class="text-indigo-100 block mb-1 text-lg font-medium white-space-nowrap">{{uname}}</span>
-                <p class="m-0 text-indigo-200">{{userrole == '1'?'Admin':'Users'}}</p>
+                <p class="m-0 text-2xl text-indigo-200">{{userrole == '1'?'Admin':'Users'}}</p>
             </div>
         </div>
         <div class="flex-auto flex pl-5 overflow-auto">

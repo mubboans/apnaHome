@@ -72,9 +72,9 @@
                 <div class="col-12 md:col-6 xl:col-4 p-3">
                     <div class="surface-card shadow-2 border-round p-4">
                         <div class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
-                            <img [src]="product.img" class="mb-3 w-9 h-5rem" (click)="onClick($event)"><span
+                            <img [src]="product.img" class="mb-3 w-9 h-8rem" (click)="onClick($event)"><span
                                 class="text-xl text-900 font-medium mb-2">{{ product.name == "" ?'-':product.name}}</span><span
-                                class="text-600 font-medium mb-3">{{product.addres.city}}</span>
+                                class="text-600 font-medium mb-3">{{product.address?.city == undefined ?'Not Listed':product.address.city}}</span>
                                 <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
                                 <span
                                 class="text-2xl text-800 block mb-3 font-semibold">₹{{product.price}}</span>
@@ -268,19 +268,19 @@
         </div>
         <div class="p-field">
             <label for="description">State</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.state" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.state" required rows="3" cols="20"/>
         </div> 
         <div class="p-field">
             <label for="description">City</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.city" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.city" required rows="3" cols="20"/>
         </div>
          <div class="p-field">
             <label for="description">Pincode</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.pincode" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.pincode" required rows="3" cols="20"/>
         </div>
          <div class="p-field">
             <label for="description">Address</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="propObject.addres.add" required rows="3" cols="20"></textarea>
+            <textarea id="description" pInputTextarea [(ngModel)]="propObject.address.add" required rows="3" cols="20"></textarea>
         </div>
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">

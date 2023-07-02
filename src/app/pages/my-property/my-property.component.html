@@ -24,20 +24,20 @@
                 </div>
                 <!-- ng-repeat="item in product" *ngIf="product.addres.add" -->
                 <div class="product-list-detail" >
-                    <span *ngIf="product.addres"> 
+                    <span *ngIf="product.address"> 
                         <h5 class="p-mb-2">{{product.name}}</h5>
                         <i class="pi pi-tag product-category-icon"></i>
-                        <span class="product-category">{{product.addres.add}}</span>
+                        <span class="product-category">{{product.address.add}}</span>
                     </span>
-                    <span *ngIf="!product.addres">-</span>
+                    <span *ngIf="!product.address">-</span>
                   
                 </div>
                 <div class="product-list-detail">
-                    <div *ngIf="product.addres">
+                    <div *ngIf="product.address">
                     <h6 class="p-mb-2">${{product.price}}</h6>
-                    <span class="product-badge status" >{{product.addres.state}}</span>
+                    <span class="product-badge status" >{{product.address.state}}</span>
                 </div>
-                <div *ngIf="!product.addres"><span>-</span></div>
+                <div *ngIf="!product.address"><span>-</span></div>
                 </div> 
                 <div class="product-list-action">
                    
@@ -72,19 +72,19 @@
          </div>
          <div class="p-field">
              <label for="description">State</label>
-             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.state" required rows="3" cols="20"/>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.address.state" required rows="3" cols="20"/>
          </div> 
          <div class="p-field">
              <label for="description">City</label>
-             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.city" required rows="3" cols="20"/>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.address.city" required rows="3" cols="20"/>
          </div>
           <div class="p-field">
              <label for="description">Pincode</label>
-             <input id="description" pInputTextarea [(ngModel)]="propertyObject.addres.pincode" required rows="3" cols="20"/>
+             <input id="description" pInputTextarea [(ngModel)]="propertyObject.address.pincode" required rows="3" cols="20"/>
          </div>
           <div class="p-field">
              <label for="description">Address</label>
-             <textarea id="description" pInputTextarea [(ngModel)]="propertyObject.addres.add" required rows="3" cols="20"></textarea>
+             <textarea id="description" pInputTextarea [(ngModel)]="propertyObject.address.add" required rows="3" cols="20"></textarea>
          </div>
          <div class="p-formgrid p-grid">
              <div class="p-field p-col">
