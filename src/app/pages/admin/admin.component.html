@@ -4,7 +4,7 @@
     <div class="p-col-12 p-md-11 p-ai-center p-jc-center mx-auto px-3 py-2">
         <div class="card">
            
-            <p-tabView styleClass="tabview-custom">
+            <p-tabView styleClass="tabview-custom p-mt-3">
                 <p-tabPanel>
                     <ng-template pTemplate = "header">
                         <i class="pi pi-calendar p-mr-2"></i>
@@ -54,8 +54,8 @@
                                 </td>
                                 <td>{{product.name}}</td>
                                 <td>{{product.price | currency:'INR'}}</td>
-                                <td>{{product.addres.city}}</td>
-                                <td>{{product.addres.state}}</td>
+                                <td>{{product.address?.city}}</td>
+                                <td>{{product.address?.state}}</td>
                                 <td>{{product.username}}</td>
                                 <td>
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
@@ -89,7 +89,7 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                      
+                            <th>Image</th>
                             <th pSortableColumn="name">User-Name <p-sortIcon field="name"></p-sortIcon></th>
                             <th pSortableColumn="price">Email <p-sortIcon field="price"></p-sortIcon></th>
                             <th pSortableColumn="rating">Password<p-sortIcon field="rating"></p-sortIcon></th>
@@ -100,7 +100,10 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
                         <tr>
-                           
+                          
+                            <td>
+                                <img src={{product.profileImg}} alt="avatar" width="100" class="p-shadow-4" /></td>
+                         
                             <td>{{product.username | uppercase}}</td>
                             <td>{{product.email}}</td>
                             <td>{{product.password}}</td>

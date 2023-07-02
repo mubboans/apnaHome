@@ -14,6 +14,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RentalComponent } from './pages/rental/rental.component';
 
 import { ProductListComponent } from './product-list/product-list.component';
+import { CheckuserComponent } from './auth-component/checkuser/checkuser.component';
 
 const routes: Routes = [
   {
@@ -42,13 +43,16 @@ path:'rental',component:RentalComponent
     path:'my-property',component:MyPropertyComponent,canActivate:[RouteGuardGuard]
   },
   {
-    path:'about',component:AboutComponent,canActivate:[RouteGuardGuard]
+    path:'about',component:AboutComponent,canActivate:[]
   },
   {
-  path:'privacy',component:PrivacyComponent,canActivate:[RouteGuardGuard]
+  path:'privacy',component:PrivacyComponent
   },
   {path:'admin',component:AdminComponent},
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  {
+    path:'checkuser',component:CheckuserComponent
+  },
+  {path:'**',redirectTo:'about',pathMatch:'full'},
 ];
 
 @NgModule({

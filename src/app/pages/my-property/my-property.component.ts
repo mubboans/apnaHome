@@ -42,7 +42,7 @@ export class MyPropertyComponent implements OnInit {
   openNew(){
     this.formData = new FormData();
     this.propertyObject = {};
-    this.propertyObject.addres={};
+    this.propertyObject.address={};
     this.postPropertymodal=true;
     this.submitted = false;
    
@@ -72,10 +72,10 @@ export class MyPropertyComponent implements OnInit {
       this.formData.append('price',this.propertyObject.price);
       this.formData.append('userID',this.propertyObject.userID);
       this.formData.append('username',this.propertyObject.username);
-      this.formData.append('state',this.propertyObject.addres.state);
-      this.formData.append('city',this.propertyObject.addres.city);
-      this.formData.append('pincode',this.propertyObject.addres.pincode);
-      this.formData.append('address',this.propertyObject.addres.add);
+      this.formData.append('state',this.propertyObject.address.state);
+      this.formData.append('city',this.propertyObject.address.city);
+      this.formData.append('pincode',this.propertyObject.address.pincode);
+      this.formData.append('address',this.propertyObject.address.add);
 this.proser.updateProperty(this.formData,this.propertyObject._id).subscribe(x=>{
     console.log(x)
     if(x){
@@ -85,17 +85,17 @@ this.proser.updateProperty(this.formData,this.propertyObject._id).subscribe(x=>{
 })
     }
     else{
-      let add: any=this.propertyObject.addres;
+      let add: any=this.propertyObject.address;
       // console.log(typeof this.tempimage);
       
       this.formData.append('name',this.propertyObject.name);
       this.formData.append('price',this.propertyObject.price);
       this.formData.append('userID',this.propertyObject.userID);
       this.formData.append('username',this.propertyObject.username);
-      this.formData.append('state',this.propertyObject.addres.state);
-      this.formData.append('city',this.propertyObject.addres.city);
-      this.formData.append('pincode',this.propertyObject.addres.pincode);
-      this.formData.append('address',this.propertyObject.addres.add);
+      this.formData.append('state',this.propertyObject.address.state);
+      this.formData.append('city',this.propertyObject.address.city);
+      this.formData.append('pincode',this.propertyObject.address.pincode);
+      this.formData.append('address',this.propertyObject.address.add);
       this.formData.forEach((key,value)=>{
         console.log(`${value}-${key}`);
         

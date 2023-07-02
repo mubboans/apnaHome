@@ -8,10 +8,10 @@
 </div>
 
 
-    <div class="p-grid p-mx-auto p-px-6">
-    <div class="p-col-12 p-md-12 p-lg-11 p-mx-auto p-px-4 p-mt-3">
+    <div class="p-grid p-mx-auto p-px-3">
+    <div class="p-col-12 p-md-12 p-lg-11 p-mx-auto p-mt-3 p-mb-3">
 
-        <p-dataView #dv [value]="propArr" [paginator]="true" [rows]="5" filterBy="name"
+        <!-- <p-dataView #dv [value]="propArr" [paginator]="true" [rows]="5" filterBy="name"
       layout="grid">
       <ng-template pTemplate="header">
           <div class="flex flex-column md:flex-row md:justify-content-between">
@@ -20,7 +20,6 @@
                   <i class="pi pi-search"></i>
                   <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
               </span>
-              <!-- <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button> -->
               <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
           </div>
       </ng-template>
@@ -65,51 +64,41 @@
             </div>
         </div>
     </ng-template>
-      <!-- <ng-template let-product pTemplate="listItem">
-          <div class="p-col-12">
-              <div class="product-list-item">
-                  <div class="product-list-detail">
-                      <div class="product-name">{{product.name}}</div>
-                      <div class="product-description">{{product.addres.add}}</div>
-                       <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
-                      <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.addres.city}}</span>
-                  </div>
-                  <div class="product-list-action">
-                      <span class="product-price">${{product.price}}</span>
-                      <p-button icon="pi pi-pencil" (click)="editProperty(product)" label="View"></p-button>
-                      <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProp(product)" label="Delete"></button>
-                       <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> 
-                  </div>
-              </div>
-          </div>
-      </ng-template>
-      <ng-template let-product pTemplate="gridItem">
-          <div class="col-12 md:col-4">
-              <div class="product-grid-item card">
-                  <div class="product-grid-item-top">
-                      <div>
-                          <i class="pi pi-tag product-category-icon"></i>
-                          <span class="product-category">{{product.addres.add}}</span>
-                      </div>
-                      <span [class]="'product-badge status'">{{product.addres.city}}</span>
-                  </div>
-                  <div class="product-grid-item-content">
-                      <div class="product-name">{{product.name}}</div>
-                      <div class="product-description">{{product.addres.state}}</div>
-                       <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating> 
-                  </div>
-                  <div class="product-grid-item-bottom">
-                      <span class="product-price">${{product.price}}</span>
-                      <p-button icon="pi pi-pencil" (click)="editProperty(product)"></p-button>
-                      <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteProp(product)"></button>
+  </p-dataView> -->
+    <div class="surface ng-star-inserted">
+        <div class="surface">
+            <div class="grid">
+                <ng-container *ngFor="let product of propArr">
+                <div class="col-12 md:col-6 xl:col-4 p-3">
+                    <div class="surface-card shadow-2 border-round p-4">
+                        <div class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
+                            <img [src]="product.img" class="mb-3 w-9 h-8rem" (click)="onClick($event)"><span
+                                class="text-xl text-900 font-medium mb-2">{{ product.name == "" ?'-':product.name}}</span><span
+                                class="text-600 font-medium mb-3">{{product.address?.city == undefined ?'Not Listed':product.address.city}}</span>
+                                <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                                <span
+                                class="text-2xl text-800 block mb-3 font-semibold">₹{{product.price}}</span>
+                          
+                        </div>
+                        <div class="flex pt-3 justify-content-between align-items-center"><button pbutton="" pripple=""
+                                icon="pi pi-shopping-cart" label="Buy Now"
+                                class="p-element p-ripple p-button-text p-button p-component"><span
+                                    class="p-button-icon p-button-icon-left pi pi-shopping-cart"
+                                    aria-hidden="true"></span><span class="p-button-label">Buy Now</span><span
+                                    class="p-ink"></span></button><button pbutton="" pripple="" icon="pi pi-heart"
+                                class="p-element p-ripple p-button-text p-button-secondary p-button p-component p-button-icon-only"><span
+                                    class="p-button-icon pi pi-heart" aria-hidden="true"></span><span
+                                    class="p-ink"></span></button></div>
                     </div>
-              </div>
-          </div>
-      </ng-template> -->
-  </p-dataView>
+                </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+  
 </div>  
 </div>
-<div class="p-grid p-ai-center p-mb-4">
+<div class="p-grid p-ai-center p-mb-4 p-mt-4">
     <!-- <h5 class="p-text-center">MONTHLY SUMMARY</h5> -->
     <div class="p-col-12 p-md-6">
         
@@ -279,19 +268,19 @@
         </div>
         <div class="p-field">
             <label for="description">State</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.state" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.state" required rows="3" cols="20"/>
         </div> 
         <div class="p-field">
             <label for="description">City</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.city" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.city" required rows="3" cols="20"/>
         </div>
          <div class="p-field">
             <label for="description">Pincode</label>
-            <input id="description" pInputTextarea [(ngModel)]="propObject.addres.pincode" required rows="3" cols="20"/>
+            <input id="description" pInputTextarea [(ngModel)]="propObject.address.pincode" required rows="3" cols="20"/>
         </div>
          <div class="p-field">
             <label for="description">Address</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="propObject.addres.add" required rows="3" cols="20"></textarea>
+            <textarea id="description" pInputTextarea [(ngModel)]="propObject.address.add" required rows="3" cols="20"></textarea>
         </div>
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">

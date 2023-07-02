@@ -14,6 +14,13 @@ export class AuthlogService {
   // .set('Content-Type', 'application/json')
  url = "https://admin.eniola.app/api/v1/login";
   constructor(public http:HttpClient) { }
+  fnRegisterWithGoogle(){
+    console.log('google');
+    
+    return this.http.get(`${environment.serverUrl}auth/google/callback`).pipe(map(x=>{
+      return x
+    }),catchError(this.handleError))
+  }
   fnLogUser(data:any):Observable<any>{
     return this.http.post<any>(`${environment.serverUrl}login`, data).pipe(map(x=>{
       return x;

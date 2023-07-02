@@ -1,7 +1,7 @@
 export class propertyObj{
     _id?: string;
     name?:string;
-    addres?:Addressdetail;
+    address?:Addressdetail;
     price?:string;
     username?:string;
     img?:string;

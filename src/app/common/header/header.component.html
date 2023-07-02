@@ -1,28 +1,137 @@
-<p-menubar [model]="items">
+<!-- <p-menubar [model]="items">
     <ng-template pTemplate="start">
-       
-       
+
     </ng-template>
     <ng-template pTemplate="start">
         <app-sidebar></app-sidebar>
     </ng-template>
-    
+
     <ng-template pTemplate="end">
-       
-     <p-tag icon="pi pi-info-circle" class="p-mr-2" (click)="routeProfile()" value="{{uname}}" severity="success"></p-tag> 
-        <!-- <button pButton pRipple type="button" icon="pi pi-search" class="p-button-outlined p-button-rounded"></button> -->
-        <button pButton pRipple type="button" (click)="fnLogout()" icon="pi pi-user" label="Logout" class="p-button-outlined p-button-rounded"></button> 
-        <!-- <button pButton pRipple type="button" icon="pi pi-heart" class="p-button-outlined p-button-rounded"></button>
-         <button pButton pRipple type="button" icon="pi pi-wallet" class="p-button-outlined p-button-rounded"></button>     -->
-    
-         <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity1" placeholder="Select a City" optionLabel="name"
-         [showClear]="true"></p-dropdown> -->
-         
+
+        <ul
+            class="list-none p-0 m-0 hidden lg:flex lg:align-items-center select-none lg:flex-row surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static">
+            <li>
+                <a
+                    class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                    <p-tag icon="pi pi-info-circle" class="p-mr-2" value="{{uname}}" severity="success"></p-tag>
+                </a>
+            </li>
+            <li>
+                <a
+                    class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                    <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge">
+                        <span class="p-badge p-component p-badge-dot p-badge-danger"></span>
+                    </i><span class="block lg:hidden font-medium">Notifications</span>
+                    <span role="presentation" class="p-ink" style="height: 56px; width: 56px;"></span>
+                </a>
+            </li>
+            <li class="border-top-1 surface-border lg:border-top-none">
+                <a
+                    class="p-ripple flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors w-full">
+                    <img (click)="routeProfile()" src={{imgurl}} alt="avatar" class="mr-3 lg:mr-0"
+                        style="width: 32px; height: 32px;">
+                    <span role="presentation" class="p-ink"
+                        style="height: 64px; width: 64px; top: -9.66667px; left: -9.66675px;">
+                    </span></a></li>
+        </ul>
+
+   
+        <button pButton pRipple type="button" (click)="fnLogout()" icon="pi pi-user" label="Logout"
+            class="p-button-outlined p-button-rounded"></button>
+
     </ng-template>
-</p-menubar>
-<div class="p-grid p-d-flex p-jc-center">
-    <div class="p-col-12 p-text-center">
-        
-        <p-tabMenu [model]="menuitem" [activeItem]="activeItem"></p-tabMenu>
+</p-menubar> -->
+
+<div class="ng-star-inserted" style="/* height: 400px; */">
+    <div class="bg-indigo-500 px-6 shadow-2 flex relative lg:static" >
+        <div routerLink="/profile" pstyleclass="#profile-10" enterclass="hidden" enteractiveclass="scalein" leavetoclass="hidden"
+            leaveactiveclass="fadeout"
+            class="p-element cursor-pointer flex p-3 align-items-center hover:bg-indigo-600 transition-colors transition-duration-150 relative select-none">
+            <img src={{imgurl}} class="lg:mr-3" style="width: 40px; height: 40px;">
+            <div class="hidden lg:block"><span
+                    class="text-indigo-100 block mb-1 text-lg font-medium white-space-nowrap">{{uname}}</span>
+                <p class="m-0 text-2xl text-indigo-200">{{userrole == '1'?'Admin':'Users'}}</p>
+            </div>
+        </div>
+        <div class="flex-auto flex pl-5 overflow-auto">
+            <ul class="flex list-none p-0 m-0">
+                <li class="h-full" routerLink="/dashboard">
+                    <a pripple=""
+                        class="p-ripple p-element cursor-pointer h-full
+                         inline-flex align-items-center justify-content-center px-5
+                          text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600
+                           transition-colors transition-duration-150">
+                           <i class="pi pi-home text-2xl p-mr-2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li routerLink="/admin" class="h-full" *ngIf="userrole == '1'"><a pripple=""
+                        class="p-ripple p-element cursor-pointer h-full inline-flex align-items-center justify-content-center px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 transition-colors transition-duration-150"><i
+                            class="pi pi-users text-2xl p-mr-2"></i><span>Users</span><span class="p-ink"></span></a></li>
+                <li routerLink="/rental" class="h-full"><a pripple=""
+                        class="p-ripple p-element cursor-pointer h-full inline-flex align-items-center justify-content-center px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 transition-colors transition-duration-150"><i
+                            class="pi pi-calendar text-2xl p-mr-2"></i><span>Rental</span><span class="p-ink"></span></a></li>
+                <li routerLink="/my-property" class="h-full">
+                    <a pripple="" class="p-ripple p-element cursor-pointer h-full inline-flex align-items-center justify-content-center px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 transition-colors transition-duration-150"><i
+                            class="pi pi-folder text-2xl p-mr-2"></i><span>My property</span>
+                            <span class="p-ink"></span></a></li>
+                <li routerLink="/privacy" class="h-full"><a pripple=""
+                        class="p-ripple p-element cursor-pointer h-full inline-flex align-items-center justify-content-center px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600 transition-colors transition-duration-150"><i
+                            class="pi pi-chart-line text-2xl p-mr-2"></i><span>Privacy</span><span class="p-ink"
+                            style="height: 88px; width: 88px; top: 3.99982px; left: 40.9479px;"></span></a></li>
+            </ul>
+        </div>
+        <div class="flex ml-5">
+            <a pripple="" pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
+                class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center lg:hidden text-white">
+                <i class="pi pi-power-off text-4xl" (click)="fnLogout()"></i>
+                <span class="p-ink" style="height: 75px; width: 75px; top: 14.1665px; left: -11.1667px;"></span></a>
+            <div
+                class="lg:block absolute lg:static left-0 top-100 z-1 shadow-2 lg:shadow-none w-full lg:w-auto hidden">
+                <ul class="h-full list-none p-0 m-0 flex select-none flex-column lg:flex-row">
+                    <li class="h-full">
+
+                        <a
+                        class="p-ripple p-element cursor-pointer
+                        h-full inline-flex align-items-center justify-content-center
+                         px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600
+                          transition-colors transition-duration-150">
+                            <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge">
+                                <span class="p-badge p-component p-badge-dot p-badge-danger"></span>
+                            </i><span class="block lg:hidden font-medium">Notifications</span>
+                            <span role="presentation" class="p-ink" style="height: 56px; width: 56px;"></span>
+                        </a>
+                    </li>
+
+                    <li class="flex justify-content-center align-items-center"> <button pButton pRipple type="button"
+                            (click)="fnLogout()" icon="pi pi-user" label="Logout"
+                            class="p-button-text text-indigo-100 p-button-rounded hover:text-indigo-50 hover:bg-indigo-600"></button> </li>
+
+                            <!-- <li class="h-full">
+                                <a pripple="" class="p-ripple p-element cursor-pointer
+                                 h-full inline-flex align-items-center justify-content-center
+                                  px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600
+                                   transition-colors transition-duration-150"><i
+                                        class="pi pi-power-off text-2xl p-mr-2"></i><span>Logout</span>
+                                        <span class="p-ink"></span></a></li> -->
+                  
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
+<p-dialog header="Change Email" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [modal]="true"
+    [style]="{width: '60vw'}" [(visible)]="showEmailDialog">
+    <!-- <div class=" shadow-2 p-4"> -->
+    <div class="text-900 font-medium mb-2 text-xl">Change Email</div>
+    <p class="mt-0 mb-4 p-0 line-height-3">
+        It seems that your email is "DEMO@GMAIL.COM".</p>
+    <div class="flex">
+        <input class="p-inputtext p-component flex-auto mr-3">
+        <button aria-label="Update" routerLink="/profile" (click)="showEmailDialog=false"
+            class="p-button p-component"><span class="p-button-label p-c">
+                Update</span><span role="presentation" class="p-ink" style="height: 96.1667px; width: 96.1667px;">
+            </span></button></div>
+    <!-- </div> -->
+</p-dialog>

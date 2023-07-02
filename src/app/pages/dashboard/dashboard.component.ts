@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ConfirmationService, MessageService } from 'primeng-lts/api';
 import { Addressdetail, propertyObj } from 'src/app/model/property';
 import { PropertyServiceService } from 'src/app/service/property-service.service';
@@ -136,7 +137,7 @@ radardata={
     });
     this.proForm=fb.group({
       name:fb.control('',Validators.required),
-      addres:fb.group({
+      address:fb.group({
           add:fb.control('',Validators.required),
           pincode:fb.control('',Validators.required),
           city:fb.control('',Validators.required),
@@ -196,7 +197,7 @@ onClick(event){
   openNew(){
    
     this.propObject = {};
-    this.propObject.addres={};
+    this.propObject.address={};
     this.postProperty=true;
     this.submitted = false;
   }

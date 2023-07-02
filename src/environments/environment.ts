@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  serverUrl:'https://restapiwithmango-production.up.railway.app/'
-  // serverUrl:'http://localhost:3000/'
-};
+  // serverUrl:'https://strange-earmuffs-clam.cyclic.app/myapi/apnahome/'
+  // serverUrl:'https://restapiwithmango-production.up.railway.app/'
+  // serverUrl:'https://rental-restapi.onrender.com/'
+  serverUrl:'http://localhost:3000/myapi/apnahome/'
+
+}; 
 
 /*
  * For easier debugging in development mode, you can import the following file

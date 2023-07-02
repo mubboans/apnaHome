@@ -13,30 +13,27 @@ export class HeaderComponent implements OnInit {
 
   constructor(public sto:StorageService,public router:Router) { }
   items: MenuItem[];
-  menuitem: MenuItem[];
   uname:string;
   activeItem: MenuItem;
-  selectedCity1:string;
-  cities: any[];
-  userdata:any
+  useremail:string;
+  showEmailDialog:boolean=false;
+  userdata:any;
+  imgurl:string;
+  userrole:string;
   ngOnInit(): void {
+
    this.userdata=JSON.parse(this.sto.getUserData())
-   console.log(this.userdata,'Check');
    const d=this.userdata.data
    this.uname=d.username;
-    this.cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
+   this.useremail=d.email;
+   this.imgurl=this.userdata.profimg;
+   this.userrole=d.user_role
+   console.log(this.userdata,'Check',this.imgurl,d);
+    if(this.useremail == 'demo@gmail.com'){
+      this.showEmailDialog=true;
+    }
     this.items = [
-    //   {
-    //     label:'Order List',
-    //     url:'productlist'
 
-    // },
     {
       label:'Dashboard',routerLink:'dashboard', icon: 'pi pi-fw pi-chart-bar',
     },
@@ -48,10 +45,7 @@ export class HeaderComponent implements OnInit {
       label:'Privacy',
       routerLink:'privacy', icon: 'pi pi-fw pi-lock',
     },
-    {
-        label:'About',
-        routerLink:'about', icon: 'pi pi-fw pi-info-circle',
-    },
+
     {
       label:'Rent',
       routerLink:'rental',icon: 'pi pi-fw pi-home',
@@ -62,23 +56,9 @@ export class HeaderComponent implements OnInit {
       icon: 'pi pi-fw pi-briefcase',
       visible:d.user_role == 1
     }
-    // {
-    //     label:'Customer List',
-    //     url:'customerlist'  
-    // },
-    
-    
+
   ];
-//   this.menuitem = [
-//     {label: 'lingerie', icon: 'pi pi-fw pi-home'},
-//     {label: 'sleepwwear', icon: 'pi pi-fw pi-calendar'},
-//     {label: 'robes', icon: 'pi pi-fw pi-pencil'},
-//     {label: 'swimwear & coverups', icon: 'pi pi-fw pi-file'},
-//     {label: 'stocking & hosiery', icon: 'pi pi-fw pi-cog'},
-//     {label: 'satin', icon: 'pi pi-apple'},
-//     {label: 'plus size', icon: 'pi pi-fw pi-book'},
-//     {label: 'loungewear', icon: 'pi pi-fw pi-thumbs-up'},
-// ];
+
   }
   routeProfile(){
     this.router.navigate(['/profile'])
