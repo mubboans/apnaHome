@@ -15,23 +15,21 @@ export class AuthlogService {
  url = "https://admin.eniola.app/api/v1/login";
   constructor(public http:HttpClient) { }
   fnRegisterWithGoogle(){
-    console.log('google');
-    
-    return this.http.get(`${environment.serverUrl}auth/google/callback`).pipe(map(x=>{
+    return this.http.get(`${environment.authRoute}auth/google/callback`).pipe(map(x=>{
       return x
     }),catchError(this.handleError))
   }
   fnLogUser(data:any):Observable<any>{
-    return this.http.post<any>(`${environment.serverUrl}login`, data).pipe(map(x=>{
+    return this.http.post<any>(`${environment.authRoute}login`, data).pipe(map(x=>{
       return x;
     }),catchError(this.handleError))
   }
   fnRegisterUser(data:any):Observable<any>{
-    return this.http.post<any>(`${environment.serverUrl}register`,data).pipe(map(x=>{
+    return this.http.post<any>(`${environment.authRoute}register`,data).pipe(map(x=>{
       return x;
     }),catchError(this.handleError))
-
   }
+ 
   getProducts():Observable<any>{
     return this.http.get<any>('./assets/expense.json')
    .pipe(

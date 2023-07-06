@@ -12,17 +12,25 @@ import { UserService } from 'src/app/service/user.service';
 export class ProfileComponent implements OnInit {
 user:User;
 userID:any;
-
+profimg:string;
   constructor(public userservice:UserService,public publicsto:StorageService,public confirmationService:ConfirmationService,public messageService:MessageService) { }
 
   ngOnInit(): void {
     let userdetail=JSON.parse(this.publicsto.getUserData())
+    this.profimg=userdetail.profimg;
     console.log(userdetail,'Check');
     const d=userdetail.data
     this.user=userdetail 
   this.userID=d.id;
     this.getUserbyId(this.userID);
 
+  }
+  delUser(){
+    this.userservice.deleteUserbyId(this.userID).subscribe((x:any)=>{
+      if(x.success){
+        this.messageService.add({severity:'error', summary:'Delete', detail:'Deleted Successfull Users',life:2000}); 
+      }
+    })
   }
   getRole(text){
     switch(text){

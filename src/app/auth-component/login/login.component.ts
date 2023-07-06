@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit {
   }
   openGoogle(){
    
-    window.open(`${environment.serverUrl}auth/google/callback`,"_self");
+    window.open(`${environment.authRoute}auth/google/callback`,"_self");
     //  window.open(`http://localhost:3000/auth/google/callback`,"_self");
     // window.location.href = 'http://localhost:3000/auth/google/callback';
   }
   openFacebook(){
     
-    window.open(`${environment.serverUrl}auth/facebook/callback`,"_self");
+    window.open(`${environment.authRoute}auth/facebook/callback`,"_self");
   }
   loginUser(){
     

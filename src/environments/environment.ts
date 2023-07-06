@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  // serverUrl:'https://strange-earmuffs-clam.cyclic.app/myapi/apnahome/'
+  serverUrl:'https://strange-earmuffs-clam.cyclic.app/myapi/apnahome/',
+  authRoute:'https://strange-earmuffs-clam.cyclic.app/'
   // serverUrl:'https://restapiwithmango-production.up.railway.app/'
   // serverUrl:'https://rental-restapi.onrender.com/'
-  serverUrl:'http://localhost:3000/myapi/apnahome/'
+  // serverUrl:'http://localhost:3000/myapi/apnahome/',
+  // authRoute:'http://localhost:3000/'
 
 }; 
 

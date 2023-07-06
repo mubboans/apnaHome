@@ -12,7 +12,7 @@ export class AdminserviceService {
   constructor(public http:HttpClient) { }
 
   getAllUser():Observable<any>{
-    return this.http.get(`${environment.serverUrl}users/all`).pipe(
+    return this.http.get(`${environment.serverUrl}/users/all`).pipe(
       map(x=>{
         return x;
       }),catchError(this.handleError)
