@@ -84,13 +84,16 @@
         <div class="flex ml-5">
             <a pripple="" pstyleclass="@next" enterclass="hidden" leavetoclass="hidden"
                 class="p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center lg:hidden text-white">
-                <i class="pi pi-power-off text-4xl" (click)="fnLogout()"></i>
+                <i class="pi pi-power-off text-2xl" (click)="fnLogout()"></i>
+               
+                
                 <span class="p-ink" style="height: 75px; width: 75px; top: 14.1665px; left: -11.1667px;"></span></a>
+                <i [ngClass]="themecolor == true ? 'pi pi-circle-on' : 'pi pi-circle-off'" class="text-2xl p-ml-3 p-ripple p-element cursor-pointer inline-flex align-items-center justify-content-center lg:hidden text-white"  (click)="changeTheme();themecolor=!themecolor"></i>
+
             <div
                 class="lg:block absolute lg:static left-0 top-100 z-1 shadow-2 lg:shadow-none w-full lg:w-auto hidden">
                 <ul class="h-full list-none p-0 m-0 flex select-none flex-column lg:flex-row">
                     <li class="h-full">
-
                         <a
                         class="p-ripple p-element cursor-pointer
                         h-full inline-flex align-items-center justify-content-center
@@ -98,23 +101,25 @@
                           transition-colors transition-duration-150">
                             <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge">
                                 <span class="p-badge p-component p-badge-dot p-badge-danger"></span>
-                            </i><span class="block lg:hidden font-medium">Notifications</span>
+                            </i>
                             <span role="presentation" class="p-ink" style="height: 56px; width: 56px;"></span>
                         </a>
                     </li>
 
-                    <li class="flex justify-content-center align-items-center"> <button pButton pRipple type="button"
+                    <li class="h-full">
+                        <a
+                        class="p-ripple p-element cursor-pointer
+                        h-full inline-flex align-items-center justify-content-center
+                         px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600
+                          transition-colors transition-duration-150">
+                          <i [ngClass]="themecolor == true ? 'pi pi-circle-on' : 'pi pi-circle-off'"
+                          class="text-2xl p-mr-2"  (click)="changeTheme();themecolor=!themecolor"></i>
+                        </a>
+                    </li>
+                    <li class="flex justify-content-center align-items-center">
+                         <button pButton pRipple type="button"
                             (click)="fnLogout()" icon="pi pi-user" label="Logout"
-                            class="p-button-text text-indigo-100 p-button-rounded hover:text-indigo-50 hover:bg-indigo-600"></button> </li>
-
-                            <!-- <li class="h-full">
-                                <a pripple="" class="p-ripple p-element cursor-pointer
-                                 h-full inline-flex align-items-center justify-content-center
-                                  px-5 text-indigo-100 hover:text-indigo-50 hover:bg-indigo-600
-                                   transition-colors transition-duration-150"><i
-                                        class="pi pi-power-off text-2xl p-mr-2"></i><span>Logout</span>
-                                        <span class="p-ink"></span></a></li> -->
-                  
+                            class="p-button-text text-indigo-100 p-button-rounded hover:text-indigo-50 hover:bg-indigo-600"></button> </li>                  
                 </ul>
             </div>
         </div>

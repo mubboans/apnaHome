@@ -1,14 +1,15 @@
 
  <app-header *ngIf="sto.isUserLogin() || showHeaderFooter"></app-header>
  <app-spinner></app-spinner>
- <main class="main">
-  
-  <!-- <app-login></app-login> -->
-<router-outlet>
- <!-- <app-about></app-about> -->
-</router-outlet>
-<!-- <app-home></app-home> -->
- </main>
+ <div class="p-card">  
+   <main class="main">
+
+  <router-outlet>
+
+  </router-outlet>
+
+   </main>
+ </div>
 
  <app-footer></app-footer> 
 

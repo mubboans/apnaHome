@@ -4,6 +4,7 @@ import {TabMenuModule} from 'primeng-lts/tabmenu';
 import {MenubarModule} from 'primeng-lts/menubar';
 import { StorageService } from 'src/app/service/storage.service';
 import { Router } from '@angular/router';
+import { ThemeselectionService } from 'src/app/service/themeselection.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public sto:StorageService,public router:Router) { }
+  constructor(public sto:StorageService,public router:Router,public theme:ThemeselectionService) { }
   items: MenuItem[];
   uname:string;
   activeItem: MenuItem;
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   userdata:any;
   imgurl:string;
   userrole:string;
+  themecolor:boolean=false;
   ngOnInit(): void {
 
    this.userdata=JSON.parse(this.sto.getUserData())
@@ -65,5 +67,18 @@ export class HeaderComponent implements OnInit {
   }
   fnLogout(){
     this.sto.logoutUser()
+  }
+  changeTheme(){
+    let color;
+    // this.themecolor = ! this.themecolor;
+    if(this.themecolor){
+      color = 'saga-blue'  
+    }
+    else{
+      color = 'bootstrap4-dark-purple'
+    }
+    console.log(color,'color');
+    
+    this.theme.switchTheme(color);
   }
 }
