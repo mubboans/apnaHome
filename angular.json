@@ -30,7 +30,26 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeng-lts/resources/themes/saga-blue/theme.css",
+              {
+                "input": "./src/assets/style/theme-saga-blue.scss",
+                "bundleName": "saga-blue",
+                "inject": false
+              },
+              {
+                "input": "./src/assets/style/theme-arya-blue.scss",
+                "bundleName": "arya-blue",
+                "inject": false
+              },
+              {
+                "input": "./src/assets/style/theme-bootstrap4-light-purple.scss",
+                "bundleName": "bootstrap4-light-purple",
+                "inject": false
+              },
+              {
+                "input": "./src/assets/style/theme-bootstrap4-dark-purple.scss",
+                "bundleName": "bootstrap4-dark-purple",
+                "inject": false
+              },
               "node_modules/primeng-lts/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css"
